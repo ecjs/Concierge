@@ -2,7 +2,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var path = require('path');
 var logger = require('morgan');
-var config = require('./configProduction.js');
+var config = require('./config');
 var twilio = require('twilio');
 
 var app = express();

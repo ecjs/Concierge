@@ -1,4 +1,4 @@
-var config = require('../configProduction.js');
+var config = require('../config');
 var twilio = require('twilio');
 var client = twilio(config.accountSid, config.authToken);
 
