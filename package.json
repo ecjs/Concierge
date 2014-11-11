@@ -1,0 +1,29 @@
+{
+  "name": "Concierge",
+  "version": "0.1.0",
+  "description": "Mobile wake up call service.",
+  "main": "server.js",
+  "scripts": {
+    "test": "grunt test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ecjs/Concierge.git"
+  },
+  "keywords": [
+    "concierge"
+  ],
+  "author": "Mark Harrell",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ecjs/Concierge/issues"
+  },
+  "homepage": "https://github.com/ecjs/Concierge",
+  "dependencies": {
+    "body-parser": "^1.9.2",
+    "express": "^4.10.2",
+    "jade": "^1.7.0",
+    "morgan": "^1.5.0",
+    "twilio": "^1.7.0"
+  }
+}
