@@ -22,4 +22,5 @@ app.use(function(req, res, next) {
 });
 
 app.listen(port);
+
 console.log('Concierge magic starts here..on port: ' + port);
