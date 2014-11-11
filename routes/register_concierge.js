@@ -1,6 +1,3 @@
-var express = require('express');
-var router = express.Router();
-
 module.exports = function(app) {
   app.get('/concierge', function(req, res) {
     res.send('concierge');
