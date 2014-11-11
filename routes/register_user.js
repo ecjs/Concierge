@@ -1,8 +1,16 @@
+var User = require('../models/user');
+var authController = require('../controllers/auth');
+
 module.exports = function(app) {
-  app.get('/user', function(req, res) {
-    res.send('user');
-  });
-  app.post('/user', function(req, res) {
-    res.json(req.body);
+  app.post('/users', function(req, res) {
+    var user = new User({
+      username: req.body.username,
+      password: req.body.password
+    });
+    user.save(function(err) {
+      if (err) res.send(err);
+
+      res.json({message: 'New note user added!'});
+    });
   });
 };
