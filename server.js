@@ -19,10 +19,10 @@ app.set('view engine', 'jade');
 var jwtauth = require('./lib/jwt_auth')(app.get('jwtSecret'));
 mongoose.connect(process.env.MONGO_URL || 'mongodb://localhost/concierge_dev');
 
-require('./routes/index')(app, jwtauth);
+require('./routes/index')(app);
 require('./routes/call')(app);
 require('./routes/register_user')(app);
-require('./routes/register_concierge')(app);
+require('./routes/register_concierge')(app, jwtauth);
 
 app.use(function(req, res, next) {
   var err = new Error('Not Found');

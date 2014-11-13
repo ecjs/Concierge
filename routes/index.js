@@ -1,5 +1,5 @@
 module.exports = function(app) {
-  app.get('/', jwtauth, function(req, res) {
+  app.get('/', function(req, res) {
     res.send('index');
   });
 };
