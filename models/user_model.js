@@ -32,9 +32,8 @@ UserSchema.pre('save', function(callback) {
 UserSchema.methods.generateToken = function(secret) {
   var self = this;
   var token  = jwt.sign({
-    issuer: self._id,
-    expiresInMinutes: 1
-  }, secret);
+    issuer: self._id
+  }, secret, { algorithm: 'RS256', expiresInMinutes: 5});
   return token;
 };
 
