@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/ecjs/Concierge",
   "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.9.2",
     "express": "^4.10.2",
     "jade": "^1.7.0",
