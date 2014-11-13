@@ -15,7 +15,7 @@ var UserSchema = mongoose.Schema({
   zipcode: {
     type: String
   },
-  jobs: [{type: ObjectId}]
+  jobs: [{type: String}]
 });
 
 UserSchema.pre('save', function(callback) {
