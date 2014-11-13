@@ -6,7 +6,7 @@ var JobSchema = mongoose.Schema({
   parent: {
     type: String
   },
-  options: [{ optionName: String }],
+  optionSelects: [{ optionName: String }],
   zipcode: {
     type: String
   },
