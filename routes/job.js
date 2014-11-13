@@ -3,6 +3,7 @@ var authController = require('../lib/auth');
 
 module.exports = function(app, jwtauth) {
   app.post('/jobs', jwtauth, function(req, res) {
+    today = new Date();
     var newJob = new Job({
       wakeUpTime: req.body.wakeUpTime,
       parent: req.body.parent,

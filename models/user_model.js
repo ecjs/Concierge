@@ -40,7 +40,7 @@ UserSchema.methods.generateToken = function(secret) {
   var self = this;
   var token  = jwt.sign({
     issuer: self._id
-  }, secret, {expiresInMinutes: 5});
+  }, secret, {expiresInMinutes: 20160});
   return token;
 };
 
