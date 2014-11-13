@@ -33,8 +33,7 @@ UserSchema.methods.generateToken = function(secret) {
   var self = this;
   var token  = jwt.sign({
     issuer: self._id
-  }, secret, { algorithm: 'RS256', expiresInMinutes: 5});
-  console.log(token);
+  }, secret, {expiresInMinutes: 5});
   return token;
 };
 
