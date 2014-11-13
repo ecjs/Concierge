@@ -26,6 +26,8 @@
     "jsonwebtoken": "^1.1.2",
     "mongoose": "^3.8.19",
     "morgan": "^1.5.0",
+    "passport": "^0.2.1",
+    "passport-http": "^0.2.2",
     "twilio": "^1.7.0"
   }
 }
