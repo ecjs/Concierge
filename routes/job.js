@@ -1,4 +1,4 @@
-var User = require('../models/jobs_model');
+var Job = require('../models/jobs_model');
 var authController = require('../lib/auth');
 
 module.exports = function(app, jwtauth) {
