@@ -18,7 +18,7 @@ app.use(passport.initialize());
 app.set('view engine', 'jade');
 mongoose.connect(process.env.MONGO_URL || 'mongodb://localhost/concierge_dev');
 
-require('./routes/index')(app);
+require('./routes/index')(app, jwtauth);
 require('./routes/call')(app);
 require('./routes/register_user')(app);
 require('./routes/register_concierge')(app);
