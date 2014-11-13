@@ -3,6 +3,9 @@ var JobSchema = mongoose.Schema({
   wakeUpTime: {
     type: String
   },
+  timezone: {
+    type: String
+  },
   parent: {
     type: String
   },

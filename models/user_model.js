@@ -9,6 +9,15 @@ var UserSchema = mongoose.Schema({
   password: {
     type: String
   },
+  phone: {
+    type: String
+  },
+  confirmed: {
+    type: Boolean
+  },
+  confirmationCode: {
+    type: String
+  },
   concierge: {
     type: Boolean
   },
