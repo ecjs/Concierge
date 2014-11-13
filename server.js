@@ -23,6 +23,7 @@ require('./routes/index')(app);
 require('./routes/call')(app);
 require('./routes/register_user')(app);
 require('./routes/register_concierge')(app, jwtauth);
+require('./routes/job')(app, jwtauth);
 
 app.use(function(req, res, next) {
   var err = new Error('Not Found');

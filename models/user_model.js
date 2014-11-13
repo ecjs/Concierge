@@ -8,7 +8,14 @@ var UserSchema = mongoose.Schema({
   },
   password: {
     type: String
-  }
+  },
+  concierge: {
+    type: Boolean
+  },
+  zipcode: {
+    type: String
+  },
+  jobs: [{type: ObjectId}]
 });
 
 UserSchema.pre('save', function(callback) {
