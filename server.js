@@ -16,6 +16,7 @@ app.use(bodyParser.json());
 app.set('jwtSecret', process.env.JWT_SECRET || 'thisisnotreallyasecretmorelikeaterces');
 app.use(passport.initialize());
 app.set('view engine', 'jade');
+var jwtauth = require('./lib/jwt_auth')(app.get('jwtSecret'));
 mongoose.connect(process.env.MONGO_URL || 'mongodb://localhost/concierge_dev');
 
 require('./routes/index')(app, jwtauth);
