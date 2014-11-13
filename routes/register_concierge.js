@@ -1,7 +1,7 @@
 var authController = require('../lib/auth');
 var jwt = require('jsonwebtoken');
 
-module.exports = function(app) {
+module.exports = function(app, jwtauth) {
   app.get('/concierge', jwtauth, function(req, res) {
     res.send('concierge');
   });
