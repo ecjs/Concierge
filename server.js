@@ -4,12 +4,19 @@ var path = require('path');
 var logger = require('morgan');
 var config = require('./config');
 var twilio = require('twilio');
+var mongoose = require('mongoose');
+var passport = require('passport');
+var authController = require('./lib/auth.js');
 
 var app = express();
 var client = twilio(config.accountSid, config.authToken);
+
 app.use(bodyParser.urlencoded({ extended: true}));
 app.use(bodyParser.json());
+app.set('jwtSecret', process.env.JWT_SECRET || 'thisisnotreallyasecretmorelikeaterces');
+app.use(passport.initialize());
 app.set('view engine', 'jade');
+mongoose.connect(process.env.MONGO_URL || 'mongodb://localhost/concierge_dev');
 
 require('./routes/index')(app);
 require('./routes/call')(app);
