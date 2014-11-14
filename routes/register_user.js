@@ -3,7 +3,6 @@ var authController = require('../lib/auth');
 
 module.exports = function(app) {
   app.post('/users', function(req, res) {
-    console.log(req.body);
     var user = new User({
       username: req.body.username,
       password: req.body.password
