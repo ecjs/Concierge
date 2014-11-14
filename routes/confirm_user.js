@@ -9,6 +9,7 @@ module.exports = function(app, jwtauth) {
       user.confirmed = true;
       user.save(function(err) {
         if (err) { return next(err); }
+        return res.status(202).json(user);
       });
     });
   });
