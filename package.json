@@ -22,6 +22,7 @@
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.9.2",
+    "cron": "^1.0.5",
     "express": "^4.10.2",
     "jade": "^1.7.0",
     "jsonwebtoken": "^1.1.2",

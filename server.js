@@ -7,6 +7,7 @@ var twilio = require('twilio');
 var mongoose = require('mongoose');
 var passport = require('passport');
 var authController = require('./lib/auth.js');
+var CronJob = require('cron').CronJob;
 
 var app = express();
 var client = twilio(config.accountSid, config.authToken);
@@ -34,3 +35,7 @@ app.use(function(req, res, next) {
 app.listen(config.port);
 
 console.log('Concierge magic starts here..on port: ' + config.port);
+
+new CronJob('* /5 * * * *', function() {
+  console.log('You will see this message every second');
+}, null, true, 'America/Los_Angeles');
