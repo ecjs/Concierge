@@ -6,7 +6,10 @@ module.exports = function(app, jwtauth) {
     var confirmation = req.body.confirmationCode;
     User.findOne({'_id': req.user._id, 'confirmationCode': confirmation}, function(err, user) {
       if (err) { return next(err); }
-      console.log(user);
+      user.confirmed = true;
+      user.save(function(err) {
+        if (err) { return next(err); }
+      });
     });
   });
   app.get('/confirm', jwtauth, function(req, res) {
