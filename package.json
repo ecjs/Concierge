@@ -20,11 +20,17 @@
   },
   "homepage": "https://github.com/ecjs/Concierge",
   "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.9.2",
+    "cron": "^1.0.5",
     "express": "^4.10.2",
     "jade": "^1.7.0",
+    "jsonwebtoken": "^1.1.2",
     "mongoose": "^3.8.19",
     "morgan": "^1.5.0",
+    "passport": "^0.2.1",
+    "passport-http": "^0.2.2",
+    "time": "^0.11.0",
     "twilio": "^1.7.0"
   }
 }
