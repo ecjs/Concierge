@@ -3,7 +3,7 @@ var authController = require('../lib/auth');
 
 module.exports = function(app, jwtauth) {
   app.post('/confirm', jwtauth, function(req, res) {
-    var confirmation = req.confirmationCode;
+    var confirmation = req.body.confirmationCode;
     User.findOne({'_id': req.user._id, 'confirmationCode': confirmation}, function(err, user) {
       if (err) { return next(err); }
       console.log(user);
