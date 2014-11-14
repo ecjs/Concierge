@@ -5,7 +5,7 @@ module.exports = function(app, jwtauth) {
   app.post('/confirm', jwtauth, function(req, res) {
     var confirmation = {confirmed: true};
     User.findOneAndUpdate({'_id': req.user._id, 'confirmationCode': confirmation}, confirmation, {upsert: true, new: true}, function(err, data) {
-      if (err) return res.status(500).json(err);
+      if (err) return res.json(err);
       return res.status(202).json(data);
     });
   });
