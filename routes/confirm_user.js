@@ -3,7 +3,8 @@ var authController = require('../lib/auth');
 
 module.exports = function(app, jwtauth) {
   app.post('/confirm', jwtauth, function(req, res) {
-    User.findOneAndUpdate({'_id': req.user._id, 'confirmationCode': confirmation}, {confirmed: true}, {new: true}, function(err, data) {
+    var confirmation = req.confirmationCode;
+    User.findOneAndUpdate({'_id': req.user._id, 'confirmationCode': confirmationCode}, {confirmed: true}, {new: true}, function(err, data) {
       if (err) return res.json(err);
       return res.status(202).json(data);
     });
