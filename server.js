@@ -36,6 +36,6 @@ app.listen(config.port);
 
 console.log('Concierge magic starts here..on port: ' + config.port);
 
-new CronJob('* */5 * * * *', function() {
-  console.log('You will see this message every second');
-}, null, true, 'America/Los_Angeles');
+new CronJob('0 * * * * *', function() {
+  console.log('You will see this message every minute');
+}, null, true, "America/Los_Angeles");
