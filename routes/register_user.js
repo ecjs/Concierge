@@ -19,7 +19,7 @@ module.exports = function(app) {
       client.sendMessage({ to: user.phone, from: config.twilioNumber, body:'Here is your Concierge confirmation number: ' + user.confirmationCode }, function(err, data) {
         if (err) return res.send('Could not send confirmation code');
       });
-      res.json({'jwt': user.generateToken(app.get('jwtSecret')), 'username': req.body.username});
+      res.json({'jwt': user.generateToken(app.get('jwtSecret'))});
     });
   });
   app.get('/users', authController.isAuthenticated, function(req, res) {
