@@ -8,6 +8,7 @@ var mongoose = require('mongoose');
 var passport = require('passport');
 var authController = require('./lib/auth.js');
 var CronJob = require('cron').CronJob;
+var jobManager = require('./lib/jobManager');
 
 var app = express();
 var client = twilio(config.accountSid, config.authToken);
@@ -37,6 +38,12 @@ app.listen(config.port);
 
 console.log('Concierge magic starts here..on port: ' + config.port);
 
-// new CronJob('0 * * * * *', function() {
-//   console.log('You will see this message every minute');
-// }, null, true, "America/Los_Angeles");
+// var jobCheckCron = new CronJob('0 * * * * *', function() {
+//   jobManager.checkJobs();
+//   console.log('Checking jobs to move to the Queue');
+// }, null, true, 'America/Los_Angeles');
+//
+// var jobQueueCheckCron = new CronJob('0 * * * * *', function() {
+//   jobManager.checkQueue();
+//   console.log('Checking jobs to send to Twilio');
+// }, null, true, 'America/Los_Angeles');

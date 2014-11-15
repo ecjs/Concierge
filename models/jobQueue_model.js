@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-var JobSchema = mongoose.Schema({
+var QueueSchema = mongoose.Schema({
   jobDate: {
     type: String
   },
@@ -19,4 +19,4 @@ var JobSchema = mongoose.Schema({
   }
 });
 
-module.exports = mongoose.model('Job', JobSchema);
+module.exports = mongoose.model('jobQueue', QueueSchema);

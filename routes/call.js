@@ -24,10 +24,10 @@ module.exports = function(app) {
         });
   });
 
-  app.post('/outbound', function(req, res) {
+  app.post('/outbound/:firstName/:lastName/:phoneNumber/', function(req, res) {
         // We could use twilio.TwimlResponse, but Jade works too - here's how
         // we would render a TwiML (XML) response using Jade
     res.type('text/xml');
-    res.render('outbound');
+    res.render('outbound', {firstName: req.params.firstName, lastName: req.params.lastName, phoneNumber: req.params.phoneNumber});
   });
 };
