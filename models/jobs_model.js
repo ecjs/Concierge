@@ -7,10 +7,8 @@ var JobSchema = mongoose.Schema({
     type: String
   },
   parentName: {
-    name: {
-      first: String,
-      last: String
-    }
+    first: String,
+    last: String
   },
   parentNumber: {
     type: String
