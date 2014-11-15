@@ -5,12 +5,11 @@ module.exports = function(app, jwtauth) {
   app.post('/jobs', jwtauth, function(req, res) {
     today = new Date();
     var newJob = new Job({
-      wakeUpTime: req.body.wakeUpTime,
+      jobDate: req.body.jobDate,
       parent: req.body.parent,
-      options: req.body.options,
-      zipcode: req.body.zipcode,
       recurring: req.body.recurring,
-      jobDate: req.body.jobDate
+      parentName: req.body.parentName,
+      parentNumber: req.body.parentNumber
     });
 
     newJob.save(function(err, data) {
