@@ -1,8 +1,8 @@
 doctype xml
 Response
   Say(voice='alice').
-    You are about to speak to {firstname} {lastname} and wake them up.  Good luck!
+    You are about to speak to #{firstname} #{lastname} and wake them up.  Good luck!
 
   // To dial another number, you would uncomment the <Dial> below and replace
   // +16519991111 with the number of your sales/support line
-  Dial +1{phoneNumber}
+  Dial +1#{phoneNumber}
