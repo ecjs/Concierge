@@ -38,12 +38,12 @@ app.listen(config.port);
 
 console.log('Concierge magic starts here..on port: ' + config.port);
 
-var jobCheckCron = new CronJob('0 * * * * *', function() {
-  jobManager.checkJobs();
-  console.log('Checking jobs to move to the Queue');
-}, null, true, 'America/Los_Angeles');
-
-var jobQueueCheckCron = new CronJob('0 * * * * *', function() {
-  jobManager.checkQueue();
-  console.log('Checking jobs to send to Twilio');
-}, null, true, 'America/Los_Angeles');
+// var jobCheckCron = new CronJob('0 * * * * *', function() {
+//   jobManager.checkJobs();
+//   console.log('Checking jobs to move to the Queue');
+// }, null, true, 'America/Los_Angeles');
+//
+// var jobQueueCheckCron = new CronJob('0 * * * * *', function() {
+//   jobManager.checkQueue();
+//   console.log('Checking jobs to send to Twilio');
+// }, null, true, 'America/Los_Angeles');
