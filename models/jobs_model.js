@@ -1,23 +1,23 @@
 var mongoose = require('mongoose');
 var JobSchema = mongoose.Schema({
-  wakeUpTime: {
-    type: String
-  },
-  timezone: {
+  jobDate: {
     type: String
   },
   parent: {
     type: String
   },
-  optionSelects: [{ optionName: String }],
-  zipcode: {
+  parentName: {
+    name: {
+      first: String,
+      last: String
+    }
+  },
+  parentNumber: {
     type: String
   },
+  options: [],
   recurring: {
     type: Boolean
-  },
-  jobDate: {
-    type: Date
   }
 });
 
