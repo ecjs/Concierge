@@ -15,7 +15,7 @@ var JobSchema = mongoose.Schema({
   parentNumber: {
     type: String
   },
-  options: [],
+  optionsList: [],
   recurring: {
     type: Boolean
   }
