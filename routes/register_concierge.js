@@ -4,6 +4,7 @@ var jwt = require('jsonwebtoken');
 
 module.exports = function(app, jwtauth) {
   app.post('/concierge', jwtauth, function(req, res) {
+    req.user.concierge = true;
     console.log(req.user);
     res.send(req.user);
     // User.findOneAndUpdate({username: req.username})
