@@ -8,6 +8,7 @@ module.exports = function(app) {
   });
 
   app.post('/call', function(req, res) {
+    console.log(req.body.phoneNumber);
     client.makeCall({
             to: req.body.phoneNumber,
             from: config.twilioNumber,
