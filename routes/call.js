@@ -37,6 +37,6 @@ module.exports = function(app) {
         // we would render a TwiML (XML) response using Jade
     console.log('twilio request:' + req.body.CallSid);
     res.type('text/xml');
-    res.render('outbound', {firstName: 'test', lastName: 'testing', phoneNumber: '3607397700'});
+    res.render('outbound', {firstName: 'test', lastName: 'testing', phoneNumber: '5555555555'});
   });
 };
