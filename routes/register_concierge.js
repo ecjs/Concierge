@@ -5,7 +5,7 @@ var jwt = require('jsonwebtoken');
 module.exports = function(app, jwtauth) {
   app.post('/concierge', jwtauth, function(req, res) {
     console.log('this should be the users id: ' + req.user._id);
-    User.findOne({'._id': req.user._id}, function(err, user) {
+    User.findOne({'_id': req.user._id}, function(err, user) {
       if (err) {
         console.log('error finding user to add concierge: ' + err);
         return res.status(500).json({message: 'error finding user'});
