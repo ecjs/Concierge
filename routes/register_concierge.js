@@ -5,9 +5,11 @@ var jwt = require('jsonwebtoken');
 module.exports = function(app, jwtauth) {
   app.post('/concierge', jwtauth, function(req, res) {
     req.user.concierge = true;
-    console.log(req.user);
-    res.send(req.user);
-    // User.findOneAndUpdate({username: req.username})
+    User.findOneAndUpdate({'._id': req.user._id}, req.user, function(err, user) {
+      if (err) return console.log('error updating user to concierge: ' + err);
+      console.log('successfully updated user to concierge: ' + user);
+    });
+    res.send('successfully updated to concierge');
   });
   app.get('/concierge', function(req, res) {
     res.json(req.body);
