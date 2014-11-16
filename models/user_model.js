@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 var bcrypt = require('bcrypt-nodejs');
 var jwt = require('jsonwebtoken');
+var random = require('mongoose-simple-random');
 
 var UserSchema = mongoose.Schema({
   username: {
@@ -29,6 +30,8 @@ var UserSchema = mongoose.Schema({
   },
   jobs: [{type: String}]
 });
+
+UserSchema.plugin(random);
 
 UserSchema.pre('save', function(callback) {
   var user = this;

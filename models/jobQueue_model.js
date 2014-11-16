@@ -16,6 +16,9 @@ var QueueSchema = mongoose.Schema({
   optionsList: [],
   recurring: {
     type: Boolean
+  },
+  pickedConcierge: {
+    type: String
   }
 });
 
