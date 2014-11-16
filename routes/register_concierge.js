@@ -34,6 +34,7 @@ module.exports = function(app, jwtauth) {
         return res.status(500).json({message: 'no user found matching that id'});
       }
       user.conciergeAvailable = true;
+      user.conciergeJobs = [];
       user.save(function(err) {
         if (err) return res.status(500).json({message: 'no user found matching that id'});
         console.log('successfully updated concierge to available: ' + user._id);

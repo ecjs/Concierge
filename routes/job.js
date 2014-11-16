@@ -1,4 +1,5 @@
 var Job = require('../models/jobs_model');
+var User = require('../models/user_model');
 var authController = require('../lib/auth');
 
 module.exports = function(app, jwtauth) {
@@ -6,15 +7,24 @@ module.exports = function(app, jwtauth) {
     today = new Date();
     var newJob = new Job({
       jobDate: req.body.jobDate,
-      parent: req.body.parent,
+      parent: req.user._id,
       recurring: req.body.recurring,
       parentName: req.body.parentName,
       parentNumber: req.body.parentNumber
     });
 
-    newJob.save(function(err, data) {
+    newJob.save(function(err, job) {
       if (err) return res.send(err);
-      res.json(data);
+      User.findById(req.user._id, function(err, user) {
+        if (err) return console.log('error finding user by ID for New Job Save: ' + err);
+        if (user === null) return console.log('user is null during New Job save.');
+        user.jobs.push(job._id);
+        user.save(function(err, job) {
+          if (err) return console.log('error saving job to user array');
+          console.log("successfully saved job to user array.")
+        });
+      });
+      res.json(job);
     });
   });
   app.get('/jobs', jwtauth, function(req, res) {

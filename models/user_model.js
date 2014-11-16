@@ -25,6 +25,7 @@ var UserSchema = mongoose.Schema({
   conciergeAvailable: {
     type: Boolean
   },
+  conciergeJobs: [{type: String}],
   zipcode: {
     type: String
   },
