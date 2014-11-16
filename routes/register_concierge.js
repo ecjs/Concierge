@@ -1,11 +1,13 @@
 var authController = require('../lib/auth');
+var User = require('../models/user_model');
 var jwt = require('jsonwebtoken');
 
 module.exports = function(app, jwtauth) {
-  app.get('/concierge', jwtauth, function(req, res) {
-    res.send('concierge');
+  app.post('/concierge', jwtauth, function(req, res) {
+    console.log(req.user.username);
+    // User.findOneAndUpdate({username: req.username})
   });
-  app.post('/concierge', function(req, res) {
+  app.get('/concierge', function(req, res) {
     res.json(req.body);
   });
 };
