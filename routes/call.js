@@ -28,7 +28,7 @@ module.exports = function(app) {
   app.post('/outbound/:firstName/:lastName/:phoneNumber/', function(req, res) {
         // We could use twilio.TwimlResponse, but Jade works too - here's how
         // we would render a TwiML (XML) response using Jade
-    console.log('twilio request:' + req.body);
+    console.log('twilio request:' + req.body.CallSid);
     res.type('text/xml');
     res.render('outbound', {firstName: req.params.firstName, lastName: req.params.lastName, phoneNumber: req.params.phoneNumber});
   });
