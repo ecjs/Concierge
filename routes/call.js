@@ -8,6 +8,7 @@ module.exports = function(app) {
   });
 
   app.post('/call', function(req, res) {
+    console.log(req.body.phoneNumber);
     client.makeCall({
             to: req.body.phoneNumber,
             from: config.twilioNumber,
@@ -27,7 +28,15 @@ module.exports = function(app) {
   app.post('/outbound/:firstName/:lastName/:phoneNumber/', function(req, res) {
         // We could use twilio.TwimlResponse, but Jade works too - here's how
         // we would render a TwiML (XML) response using Jade
+    console.log('twilio request: ' + req.body.CallSid);
     res.type('text/xml');
     res.render('outbound', {firstName: req.params.firstName, lastName: req.params.lastName, phoneNumber: req.params.phoneNumber});
+  });
+  app.post('/outbound/', function(req, res) {
+        // We could use twilio.TwimlResponse, but Jade works too - here's how
+        // we would render a TwiML (XML) response using Jade
+    console.log('twilio request:' + req.body.CallSid);
+    res.type('text/xml');
+    res.render('outbound', {firstName: 'test', lastName: 'testing', phoneNumber: '5555555555'});
   });
 };
