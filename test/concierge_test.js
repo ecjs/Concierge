@@ -12,7 +12,7 @@ describe('the concierge test', function(){
   var jwtToken;
 
   before(function (done) {
-    chai.request('http://localhost:3000')
+    chai.request('https://quiet-dusk-4540.herokuapp.com')
     .post('/concierge')
     .send({email: 'test@example.com', password: 'foobar123'})
     .end(function (err, res) {
@@ -22,7 +22,7 @@ describe('the concierge test', function(){
   });
 
   it('should create a concierge', function(done){
-    chai.request('http://localhost:3000')
+    chai.request('https://quiet-dusk-4540.herokuapp.com')
     .post('/concierge')
     .send({'_id': req.user._id})
     .end(function(err,res){
@@ -33,7 +33,7 @@ describe('the concierge test', function(){
   });
 
   it('should confirm a concierge', function(done){
-    chai.request('http://localhost:3000')
+    chai.request('https://quiet-dusk-4540.herokuapp.com')
       .post('/conciergeAvailable')
       .send({'_id': req.user._id})
       .end(function(err,res){
@@ -45,7 +45,7 @@ describe('the concierge test', function(){
     });
 
   it('should get a concierge', function(done){
-    chai.request('http://localhost:3000')
+    chai.request('https://quiet-dusk-4540.herokuapp.com')
       .post('/concierge')
       .auth() //should be some type of auth even though its not in the register_concierge get
       .end(function(err,res){

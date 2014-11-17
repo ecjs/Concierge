@@ -12,7 +12,7 @@ describe('the user test', function(){
   var jwtToken;
 
   before(function (done) {
-    chai.request('http://localhost:3000')
+    chai.request('https://quiet-dusk-4540.herokuapp.com')
       .post('/users')
       .send({email: 'test@example.com', password: 'foobar123'})
       .end(function (err, res) {
@@ -22,7 +22,7 @@ describe('the user test', function(){
   });
 
   it('should create a user', function(done){
-    chai.request('http://localhost:3000')
+    chai.request('https://quiet-dusk-4540.herokuapp.com')
       .post('/users')
       .set({jwt: jwtToken}) //or confirmation code?
       .end(function(err, res){
@@ -33,7 +33,7 @@ describe('the user test', function(){
   });
 
   it('should get a user', function(done){
-    chai.request('http://localhost:3000')
+    chai.request('https://quiet-dusk-4540.herokuapp.com')
       .get('/users')
       .auth()   //jwt or confirmation code?
       .end(function(err,res){
@@ -44,7 +44,7 @@ describe('the user test', function(){
     });
 
   it('should confirm a user', function(done){
-    chai.request('http://localhost:3000')
+    chai.request('https://quiet-dusk-4540.herokuapp.com')
       .post('/confirm')
       .auth() //confirmation code?
       .end(function(err,res){
@@ -55,7 +55,7 @@ describe('the user test', function(){
     });
 
   it('should get a confirmed user', function(done){
-    chai.request('http://localhost:3000')
+    chai.request('https://quiet-dusk-4540.herokuapp.com')
       .get('/confirm')
       .auth()
       .end(function(err,res){

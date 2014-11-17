@@ -6,7 +6,8 @@ module.exports = function(grunt) {
   grunt.initConfig({
     jshint: {
       options: {
-        node: true
+        node: true,
+        jshintrc: true
       },
       src: ['server.js', 'routes/**/*.js', 'lib/*.js']
     },
@@ -19,9 +20,15 @@ module.exports = function(grunt) {
     },
 
     simplemocha: {
-      src: ['test/**/*.js']
+      options: {
+        timeout: 3000,
+        ignoreLeaks: false,
+        reporter: 'tap'
+      },
+      src: ['test/**/user_test.js']
     }
   });
 
   grunt.registerTask('test', ['jshint', 'jscs', 'simplemocha']);
+  grunt.registerTask('default',['test']);
 };
