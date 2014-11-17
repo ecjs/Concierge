@@ -9,8 +9,8 @@ module.exports = function(app, jwtauth) {
       jobDate: req.body.jobDate,
       parent: req.user._id,
       recurring: req.body.recurring,
-      parentName: req.body.parentName,
-      parentNumber: req.body.parentNumber
+      parentName: req.user.name,
+      parentNumber: req.user.phone
     });
 
     newJob.save(function(err, job) {
@@ -21,7 +21,7 @@ module.exports = function(app, jwtauth) {
         user.jobs.push(job._id);
         user.save(function(err, job) {
           if (err) return console.log('error saving job to user array');
-          console.log("successfully saved job to user array.")
+          console.log('successfully saved job to user array.');
         });
       });
       res.json(job);

@@ -13,6 +13,10 @@ var UserSchema = mongoose.Schema({
   phone: {
     type: String
   },
+  name: {
+    first:{type: String},
+    last:{type: String}
+  },
   confirmed: {
     type: Boolean
   },
