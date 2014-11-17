@@ -6,6 +6,7 @@ var client = twilio(config.accountSid, config.authToken);
 
 module.exports = function(app) {
   app.post('/users', function(req, res) {
+    console.log(req.body);
     var user = new User({
       username: req.body.username,
       password: req.body.password,

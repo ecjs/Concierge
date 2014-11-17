@@ -30,9 +30,6 @@ var UserSchema = mongoose.Schema({
     type: Boolean
   },
   conciergeJobs: [{type: String}],
-  zipcode: {
-    type: String
-  },
   jobs: [{type: String}]
 });
 
