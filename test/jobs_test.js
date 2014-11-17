@@ -28,8 +28,8 @@ describe('the jobs test', function(){
       .end(function(err, res){
         expect(err).to.be(null)
         expect(res.body).to.have.property('_id')
-      })
-  })
+      });
+  });
 
 
 });
