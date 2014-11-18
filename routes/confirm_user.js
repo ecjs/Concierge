@@ -5,11 +5,8 @@ var User = require('../models/user_model');
 module.exports = function(app, jwtauth) {
   app.post('/confirm', jwtauth, function(req, res) {
     var confirmation = req.body.confirmationCode;
-    console.log(confirmation);
     User.findOne({_id: req.user._id, confirmationCode: confirmation}, function(err, user) {
-      console.log(confirmation);
       if (user === null) {
-        console.log(confirmation);
         return res.status(500).json({confirmed: false});
       }
       if (err) { return (err); }

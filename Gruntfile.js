@@ -40,12 +40,5 @@ module.exports = function(grunt) {
   });
 
   grunt.registerTask('test', ['jshint', 'jscs', 'simplemocha', /*'mongo_drop'*/]);
-
-      src: ['test/user_test.js']
-    }
-  });
-
-  grunt.registerTask('test', ['jshint', 'jscs', 'simplemocha']);
-
   grunt.registerTask('default',['test']);
 };

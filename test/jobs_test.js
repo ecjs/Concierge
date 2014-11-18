@@ -1,11 +1,20 @@
+//jobs test
 
+process.env.MONGO_URL = 'mongodb://localhost/jobs_test';
 var chai = require('chai');
 var chaihttp = require('chai-http');
+var User = require('../models/user_model');
 var moment = require('moment');
 chai.use(chaihttp);
 
+require('../server');
+
 var expect = chai.expect;
-var testUrl = 'https://quiet-dusk-4540.herokuapp.com';
+var testUrl = 'http://localhost:3000';
+
+User.collection.remove(function(err){
+  if(err) throw(err);
+});
 
 describe('the jobs test', function(){
   
@@ -28,11 +37,11 @@ describe('the jobs test', function(){
   it('should create a job', function(done){
     chai.request(testUrl)
       .post('/jobs')
-      .auth({jwt:jwtToken})
+      .send({jwt:jwtToken})
       //.send({jobDate:jobdate, recurring:true})
       .end(function(err, res){
         expect(err).to.eql(null)
-        expect(res.body).to.have.property('parent');
+        expect(res.body).to.have.property('_id');
       });
   });
 
