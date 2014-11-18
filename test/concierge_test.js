@@ -1,4 +1,4 @@
-process.env.MONGO_URL = 'mongodb://localhost/concierge_test';
+process.env.MONGO_URL = 'mongodb://concierge:foobar123@ds053190.mongolab.com:53190/concierge';
 var chai = require('chai');
 var chaihttp = require('chai-http');
 chai.use(chaihttp);
