@@ -23,6 +23,7 @@ require('./routes/register_concierge')(app, jwtauth);
 require('./routes/job')(app, jwtauth);
 require('./routes/confirm_user')(app, jwtauth);
 require('./routes/resendConfirmation')(app, jwtauth);
+require('./routes/change_password')(app, jwtauth);
 
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
