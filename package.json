@@ -33,7 +33,8 @@
     "passport": "^0.2.1",
     "passport-http": "^0.2.2",
     "time": "^0.11.0",
-    "twilio": "^1.7.0"
+    "twilio": "^1.7.0",
+    "validator": "^3.22.1"
   },
   "devDependencies": {
     "chai": "^1.10.0",
