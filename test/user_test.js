@@ -8,14 +8,14 @@ chai.use(chaihttp);
 
 var expect = chai.expect;
 
-User.collection.drop(function(err){
-  if(err) throw(err);
-});
+// User.collection.drop(function(err){
+//   if(err) throw(err);
+// });
 
 describe('the user test', function(){
   var id;
   var jwtToken;
-  
+
 
   before(function (done) {
     chai.request('https://quiet-dusk-4540.herokuapp.com')
@@ -52,12 +52,12 @@ describe('the user test', function(){
   it('should confirm a user', function(done){
     chai.request('https://quiet-dusk-4540.herokuapp.com')
       .post('/confirm')
-      .set({jwt:jwtToken}) 
+      .set({jwt:jwtToken})
       .end(function(err,res){
         expect (err).to.be.eql(null);
         expect (res.body.confirmed).to.be.false;
         done();
-      }); 
+      });
     });
 
   it('should get a confirmed user', function(done){
@@ -71,4 +71,4 @@ describe('the user test', function(){
       });
   });
 
-}); 
+});
