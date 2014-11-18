@@ -1,3 +1,5 @@
+'use strict';
+
 var config = require('../config');
 var twilio = require('twilio');
 var client = twilio(config.accountSid, config.authToken);
@@ -13,7 +15,7 @@ module.exports = function(app) {
             to: req.body.phoneNumber,
             from: config.twilioNumber,
             url: process.env.URL + '/outbound'
-        }, function(err, message) {
+        }, function(err) {
           console.log(err);
           if (err) {
             res.status(500).send(err);
