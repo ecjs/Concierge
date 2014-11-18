@@ -27,8 +27,7 @@ module.exports = function(app, jwtauth) {
       res.json(job);
     });
   });
-<<<<<<< HEAD
-=======
+
 
   app.get('/jobs', jwtauth, function(req, res) {
     Job.find({parent:req.user._id}, function(err, jobs) {
@@ -36,5 +35,5 @@ module.exports = function(app, jwtauth) {
       res.json(jobs);
     });
   });
->>>>>>> upstream/dev
+
 };

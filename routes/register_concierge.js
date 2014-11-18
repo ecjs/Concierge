@@ -43,7 +43,7 @@ module.exports = function(app, jwtauth) {
     });
   });
   app.post('/conciergeUnavailable', jwtauth, function(req, res) {
-    User.findOne({'_id': req.user._id}, function(err, user) {
+    User.findOne({_id: req.user._id}, function(err, user) {
       if (err) {
         console.log('error finding Concierge to make unavailable: ' + err);
         return res.status(500).json({message: 'error finding concierge'});
