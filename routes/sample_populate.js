@@ -5,11 +5,11 @@ var agent = superagent.agent();
 module.exports = function(app) {
   app.get('/samplePopulate', function(req, res) {
     agent
-    .post('/user')
+    .post('/users')
     .send({username: 'test@example.com', password: 'foobar123', name: {first:'Mark', last: 'Harrell'}, phone: '5555555555'})
     .set('Content-Type', 'application/json')
-    .end(function(err, res) {
-      if (err) return res.status(500).json({msg: 'couldnt send user'});
+    .end(function(err, superRes) {
+      if (err) return console.log('did not populate');
       console.log('added user in populate' + res);
     });
   });
