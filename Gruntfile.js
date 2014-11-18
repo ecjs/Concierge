@@ -26,19 +26,18 @@ module.exports = function(grunt) {
         //ignoreLeaks: false,
         reporter: 'tap'
       },
-<<<<<<< HEAD
-      src: [/*'test/user_test.js', 'test/concierge_test.js',*/'test/jobs_test.js']
-=======
-      src: ['test/user_test.js']
-    },
-    mongo_drop: {
+
+      src: ['test/user_test.js', /*'test/concierge_test.js',*/'test/jobs_test.js']
+
+    }
+    /*mongo_drop: {
         test: {
           uri: process.env.MONGO_URL
->>>>>>> upstream/dev
+
     }
-  }
+  }*/
   });
 
-  grunt.registerTask('test', ['jshint', 'jscs', 'simplemocha', 'mongo_drop']);
+  grunt.registerTask('test', ['jshint', 'jscs', 'simplemocha', /*'mongo_drop'*/]);
   grunt.registerTask('default',['test']);
 };

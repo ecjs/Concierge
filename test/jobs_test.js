@@ -5,7 +5,7 @@ var moment = require('moment');
 chai.use(chaihttp);
 
 var expect = chai.expect;
-var testUrl = 'https://quiet-dusk-4540.herokuapp.com/';
+var testUrl = 'https://quiet-dusk-4540.herokuapp.com';
 
 describe('the jobs test', function(){
   
@@ -19,6 +19,7 @@ describe('the jobs test', function(){
     .end(function (err, res) {
       console.log(err);
       jwtToken = res.body.jwt;
+      console.log(res.body);
       done();
     });
   });
@@ -27,11 +28,11 @@ describe('the jobs test', function(){
   it('should create a job', function(done){
     chai.request(testUrl)
       .post('/jobs')
-      .send({jwt:jwtToken})
+      .auth({jwt:jwtToken})
       //.send({jobDate:jobdate, recurring:true})
       .end(function(err, res){
         expect(err).to.eql(null)
-        expect(res.body.jwt).to.have.property('parent');
+        expect(res.body).to.have.property('parent');
       });
   });
 

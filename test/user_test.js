@@ -3,7 +3,8 @@
 var chai = require('chai');
 var chaihttp = require('chai-http');
 chai.use(chaihttp);
-var testingUrl = 'https://salty-earth-1782.herokuapp.com';
+//var testingUrl = 'https://salty-earth-1782.herokuapp.com';
+var testingUrl = 'https://quiet-dusk-4540.herokuapp.com';
 
 var expect = chai.expect;
 
@@ -35,7 +36,7 @@ describe('the user test', function(){
   it('should get a user', function(done){
     chai.request(testingUrl)
       .get('/users')
-      .auth("joe2@example.com","foobar123")
+      .auth("joe1@example.com","foobar123")
       .end(function(err,res){
         expect (err).to.be.eql(null);
         expect (res.body).to.have.property('jwt');
