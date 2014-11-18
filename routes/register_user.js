@@ -51,3 +51,6 @@ module.exports = function(app) {
     res.json({jwt: req.user.generateToken(app.get('jwtSecret'))});
   });
 };
+
+//regex source:
+//http://www.the-art-of-web.com/javascript/validate-password/
