@@ -2,8 +2,8 @@
 
 var chai = require('chai');
 var chaihttp = require('chai-http');
-var User = require('../models/user_model.js');
 chai.use(chaihttp);
+var testingUrl = 'https://salty-earth-1782.herokuapp.com';
 
 var expect = chai.expect;
 
@@ -13,9 +13,9 @@ describe('the user test', function(){
 
 
   before(function (done) {
-    chai.request('https://quiet-dusk-4540.herokuapp.com')
+    chai.request(testingUrl)
       .post('/users')
-      .send({username:"joe1234",password:"foobar123",phone:"8474775286",name:{first:"joe",last:"elsey"}})
+      .send({username:"joe1234",password:"foobar123",phone:"3607393580",name:{first:"joe",last:"elsey"}})
       .end(function (err, res) {
         jwtToken = res.body.jwt;
         done();
@@ -23,9 +23,9 @@ describe('the user test', function(){
   });
 
   it('should create a user', function(done){
-    chai.request('https://quiet-dusk-4540.herokuapp.com')
+    chai.request(testingUrl)
       .post('/users')
-      .send({username:"joe1234",password:"foobar123",phone:"8474775286",name:{first:"joe",last:"elsey"}}) //or confirmation code?
+      .send({username:"joe1234",password:"foobar123",phone:"3607393580",name:{first:"joe",last:"elsey"}}) //or confirmation code?
       .end(function(err, res){
         expect (err).to.be.eql(null);
         expect (res.body).to.have.property('jwt');
@@ -34,7 +34,7 @@ describe('the user test', function(){
   });
 
   it('should get a user', function(done){
-    chai.request('https://quiet-dusk-4540.herokuapp.com')
+    chai.request(testingUrl)
       .get('/users')
       .auth("joe1234","foobar123")
       .end(function(err,res){
@@ -45,7 +45,7 @@ describe('the user test', function(){
     });
 
   it('should confirm a user', function(done){
-    chai.request('https://quiet-dusk-4540.herokuapp.com')
+    chai.request(testingUrl)
       .post('/confirm')
       .set({jwt:jwtToken})
       .end(function(err,res){
@@ -56,7 +56,7 @@ describe('the user test', function(){
     });
 
   it('should get a confirmed user', function(done){
-    chai.request('https://quiet-dusk-4540.herokuapp.com')
+    chai.request(testingUrl)
       .post('/confirm')
       .send({jwt:jwtToken})
       .end(function(err,res){
