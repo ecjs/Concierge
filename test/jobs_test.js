@@ -7,7 +7,7 @@ chai.use(chaihttp);
 var expect = chai.expect;
 
 describe('the jobs test', function(){
-  var id;
+  
   var jwtToken;
   var date = moment().utc().add(1, 'days').format();
 

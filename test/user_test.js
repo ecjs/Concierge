@@ -8,14 +8,13 @@ var testingUrl = 'https://salty-earth-1782.herokuapp.com';
 var expect = chai.expect;
 
 describe('the user test', function(){
-  var id;
   var jwtToken;
 
 
   before(function (done) {
     chai.request(testingUrl)
       .post('/users')
-      .send({username:"joe1234",password:"foobar123",phone:"3607393580",name:{first:"joe",last:"elsey"}})
+      .send({username:"joe1234",password:"foobar123",phone:"8474775286",name:{first:"joe",last:"elsey"}})
       .end(function (err, res) {
         jwtToken = res.body.jwt;
         done();
@@ -25,7 +24,7 @@ describe('the user test', function(){
   it('should create a user', function(done){
     chai.request(testingUrl)
       .post('/users')
-      .send({username:"joe1234",password:"foobar123",phone:"3607393580",name:{first:"joe",last:"elsey"}}) //or confirmation code?
+      .send({username:"joe1234",password:"foobar123",phone:"8474775286",name:{first:"joe",last:"elsey"}}) //or confirmation code?
       .end(function(err, res){
         expect (err).to.be.eql(null);
         expect (res.body).to.have.property('jwt');
