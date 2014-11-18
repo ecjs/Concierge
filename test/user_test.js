@@ -3,14 +3,13 @@
 var chai = require('chai');
 var chaihttp = require('chai-http');
 chai.use(chaihttp);
-var testingUrl = 'https://ourconciergeapp.herokuapp.com';
+var testingUrl = 'https://salty-earth-1782.herokuapp.com';
 
 var expect = chai.expect;
 
 describe('the user test', function(){
   var id;
   var jwtToken;
-
 
   before(function (done) {
     chai.request(testingUrl)
