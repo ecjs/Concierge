@@ -5,7 +5,6 @@ var twilio = require('twilio');
 var client = twilio(config.accountSid, config.authToken);
 
 module.exports = function(app) {
-  
   app.post('/call', function(req, res) {
     console.log(req.body.phoneNumber);
     client.makeCall({

@@ -14,7 +14,7 @@ describe('the user test', function(){
   before(function (done) {
     chai.request(testingUrl)
       .post('/users')
-      .send({username:"joe1234",password:"foobar123",phone:"8474775286",name:{first:"joe",last:"elsey"}})
+      .send({username:"joe@example.com",password:"foobar123",phone:"8474775286",name:{first:"joe",last:"elsey"}})
       .end(function (err, res) {
         jwtToken = res.body.jwt;
         done();
@@ -24,7 +24,7 @@ describe('the user test', function(){
   it('should create a user', function(done){
     chai.request(testingUrl)
       .post('/users')
-      .send({username:"joe1234",password:"foobar123",phone:"8474775286",name:{first:"joe",last:"elsey"}}) //or confirmation code?
+      .send({username:"joe1@example.com",password:"foobar123",phone:"8474775286",name:{first:"joe",last:"elsey"}}) //or confirmation code?
       .end(function(err, res){
         expect (err).to.be.eql(null);
         expect (res.body).to.have.property('jwt');
@@ -35,7 +35,7 @@ describe('the user test', function(){
   it('should get a user', function(done){
     chai.request(testingUrl)
       .get('/users')
-      .auth("joe1234","foobar123")
+      .auth("joe2@example.com","foobar123")
       .end(function(err,res){
         expect (err).to.be.eql(null);
         expect (res.body).to.have.property('jwt');
