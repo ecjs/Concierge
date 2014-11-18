@@ -5,7 +5,6 @@ var User = require('../models/user_model');
 
 module.exports = function(app, jwtauth) {
   app.post('/jobs', jwtauth, function(req, res) {
-    
     var newJob = new Job({
       jobDate: req.body.jobDate,
       parent: req.user._id,
@@ -28,5 +27,4 @@ module.exports = function(app, jwtauth) {
       res.json(job);
     });
   });
-  
 };

@@ -8,10 +8,14 @@ require('../../server');
 
 var expect = chai.expect;
 
+User.collection.drop(function(err){
+  if(err) throw(err);
+});
+
 describe('the user test', function(){
   var id;
   var jwtToken;
-  var code;
+  
 
   before(function (done) {
     chai.request('https://quiet-dusk-4540.herokuapp.com')
@@ -19,10 +23,10 @@ describe('the user test', function(){
       .send({username:"joe1234",password:"foobar123",phone:"8474775286",name:{first:"joe",last:"elsey"}})
       .end(function (err, res) {
         jwtToken = res.body.jwt;
-        code = res.body.confirmationCode;
         done();
     });
   });
+   //var code = User.collection.find({confirmationCode:res.body.confirmationCode});
 
   it('should create a user', function(done){
     chai.request('https://quiet-dusk-4540.herokuapp.com')
