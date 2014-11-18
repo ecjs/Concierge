@@ -60,7 +60,7 @@ module.exports = function(app, jwtauth) {
       });
     });
   });
-  app.get('/concierge', function(req, res) {
+  app.get('/concierge', jwtauth, function(req, res) {
     res.json(req.body);
   });
 };

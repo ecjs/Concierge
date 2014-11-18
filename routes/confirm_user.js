@@ -17,4 +17,7 @@ module.exports = function(app, jwtauth) {
       });
     });
   });
+  app.get('/confirmed', jwtauth, function(req, res) {
+    res.status(200).json({confirmed: jwtauth.user.confirmed});
+  });
 };
