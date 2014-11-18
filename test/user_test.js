@@ -68,6 +68,7 @@ describe('the user test', function(){
       .end(function(err,res){
         expect (err).to.be.eql(null);
         expect (res.body.confirmed).to.be.false;
+        done();
       });
   });
 
