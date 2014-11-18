@@ -11,10 +11,12 @@ module.exports = function(app) {
 
   app.post('/users', function(req, res) {
     //check if email has valid syntax
-    if (!(validator.isEmail(req.body.username))) return res.status(500).send('that is not a valid email');
-    var regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/;
+    if (!(validator.isEmail(req.body.username))) {
+      return res.status(500).send('that is not a valid email');
+    }
 
     //set and check password requirements
+    var regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/;
     if (!regex.test(req.body.password)) {
       return res.status(500).send('password needs one number, lowercase, and uppercase letter and must be at least six characters');
     }
