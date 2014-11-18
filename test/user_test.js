@@ -36,7 +36,7 @@ describe('the user test', function(){
   it('should get a user', function(done){
     chai.request('https://quiet-dusk-4540.herokuapp.com')
       .get('/users')
-      .auth("joe1234","foobar123")   //jwt or confirmation code?
+      .auth("joe1234","foobar123")
       .end(function(err,res){
         expect (err).to.be.eql(null);
         expect (res.body).to.have.property('jwt');
@@ -47,10 +47,10 @@ describe('the user test', function(){
   it('should confirm a user', function(done){
     chai.request('https://quiet-dusk-4540.herokuapp.com')
       .post('/confirm')
-      .auth({"joe1234","foobar123"}) //confirmation code?
+      .set({jwt:jwtToken}) //confirmation code?
       .end(function(err,res){
         expect (err).to.be.eql(null);
-        expect (res.body).to.be.true;
+        expect (res.body.confirmed).to.be.false;
         done();
       }); 
     });
@@ -58,11 +58,11 @@ describe('the user test', function(){
   it('should get a confirmed user', function(done){
     chai.request('https://quiet-dusk-4540.herokuapp.com')
       .get('/confirm')
-      .auth()
+      .set({jwt:jwtToken})
       .end(function(err,res){
         expect (err).to.be.eql(null);
-        expect (res.body).to.have.property('_id');
-      })
-  })
+        expect (res.body).to.be.true;
+      });
+  });
 
 }); 
