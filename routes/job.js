@@ -27,4 +27,11 @@ module.exports = function(app, jwtauth) {
       res.json(job);
     });
   });
+
+  app.get('/jobs', jwtauth, function(req, res) {
+    Job.find({parent:req.user._id}, function(err, jobs) {
+      if (err) return res.json({msg: 'no jobs found'});
+      res.json(jobs);
+    });
+  });
 };
