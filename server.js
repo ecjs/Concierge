@@ -25,6 +25,8 @@ require('./routes/confirm_user')(app, jwtauth);
 require('./routes/resendConfirmation')(app, jwtauth);
 require('./routes/change_password')(app, jwtauth);
 require('./routes/change_phone')(app, jwtauth);
+require('./routes/change_username')(app, jwtauth);
+require('./routes/password_reset')(app, jwtauth);
 
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
