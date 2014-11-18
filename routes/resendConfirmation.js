@@ -1,5 +1,7 @@
 'use strict';
-
+var config = require('../config');
+var twilio = require('twilio');
+var client = twilio(config.accountSid, config.authToken);
 var User = require('../models/user_model');
 
 module.exports = function(app, jwtauth) {
