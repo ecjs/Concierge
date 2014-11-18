@@ -1,10 +1,8 @@
-process.env.MONGO_URL = 'mongodb://localhost/jobs_test';
+process.env.MONGO_URL = 'mongodb://concierge:foobar123@ds053190.mongolab.com:53190/concierge';
 var chai = require('chai');
 var chaihttp = require('chai-http');
 var moment = require('moment');
 chai.use(chaihttp);
-
-require('../../server');
 
 var expect = chai.expect;
 

@@ -6,7 +6,7 @@ var User = require('../models/user_model');
 
 module.exports = function(app, jwtauth) {
   app.post('/resendConfirmation', jwtauth, function(req, res) {
-    User.findOne({'_id': req.user._id}, function(err, user) {
+    User.findOne({_id: req.user._id}, function(err, user) {
       if (user === null) {
         return res.status(500).json({msg: 'no user found'});
       }

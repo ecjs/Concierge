@@ -17,11 +17,13 @@ module.exports = function(app) {
       if (!regex.test(req.body.password)) {
         return res.status(500).send('password needs one number, lowercase, and uppercase letter and must be at least six characters');
       }
+
       var user = new User({
         username: req.body.username,
         password: req.body.password,
         phone: req.body.phone,
-        name: req.body.name
+        name: req.body.name,
+        confirmed: false
       });
       var randomCode = Math.floor(100000 + Math.random() * 900000);
       user.confirmationCode = randomCode;
@@ -32,13 +34,12 @@ module.exports = function(app) {
         // Check if user.phone matchings the correct pattern (valid phone, does not start with +)
         client.sendMessage({ to: user.phone, from: config.twilioNumber, body:'Here is your Concierge confirmation number: ' + user.confirmationCode }, function(err2) {
           if (err2) return res.status(500).send('confirmation code could not be sent.');
-          return res.status(202).send();
         });
       });
+      res.json({jwt: user.generateToken(app.get('jwtSecret'))});
     });
   });
   app.get('/users', authController.isAuthenticated, function(req, res) {
-    res.json({'jwt': req.user.generateToken(app.get('jwtSecret'))});
-
+    res.json({jwt: req.user.generateToken(app.get('jwtSecret'))});
   });
 };
