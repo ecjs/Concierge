@@ -3,19 +3,7 @@
 var chai = require('chai');
 var chaihttp = require('chai-http');
 chai.use(chaihttp);
-var testingUrl = 'https://salty-earth-1782.herokuapp.com';
-var mongoose = require('mongoose');
 var expect = chai.expect;
-mongoose.connect(process.ENV.MONGO_URL);
-mongoose.connection.collections['users'].drop( function(err) {
-  console.log('user collection dropped');
-});
-mongoose.connection.collections['jobs'].drop( function(err) {
-  console.log('jobs collection dropped');
-});
-mongoose.connection.collections['jobqueue'].drop( function(err) {
-  console.log('jobqueue collection dropped');
-});
 describe('the user test', function(){
   var id;
   var jwtToken;
