@@ -11,6 +11,7 @@ describe('the user test', function(){
   var id;
   var jwtToken;
 
+
   before(function (done) {
     chai.request(testingUrl)
       .post('/users')
