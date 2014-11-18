@@ -11,6 +11,7 @@ var expect = chai.expect;
 describe('the user test', function(){
   var id;
   var jwtToken;
+  var code;
 
   before(function (done) {
     chai.request('https://quiet-dusk-4540.herokuapp.com')
@@ -18,6 +19,7 @@ describe('the user test', function(){
       .send({username:"joe1234",password:"foobar123",phone:"8474775286",name:{first:"joe",last:"elsey"}})
       .end(function (err, res) {
         jwtToken = res.body.jwt;
+        code = res.body.confirmationCode;
         done();
     });
   });
@@ -57,11 +59,11 @@ describe('the user test', function(){
 
   it('should get a confirmed user', function(done){
     chai.request('https://quiet-dusk-4540.herokuapp.com')
-      .get('/confirm')
-      .set({jwt:jwtToken})
+      .post('/confirm')
+      .send(User.findOne())
       .end(function(err,res){
         expect (err).to.be.eql(null);
-        expect (res.body).to.be.true;
+        expect (res.body.confirmationCode).to.be.true;
       });
   });
 
