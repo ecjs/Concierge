@@ -3,7 +3,7 @@
 var chai = require('chai');
 var chaihttp = require('chai-http');
 chai.use(chaihttp);
-var testingUrl = 'https://salty-earth-1782.herokuapp.com';
+var testingUrl = 'https://ourconciergeapp.herokuapp.com/';
 
 var expect = chai.expect;
 
