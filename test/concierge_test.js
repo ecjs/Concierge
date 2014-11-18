@@ -3,8 +3,6 @@ var chai = require('chai');
 var chaihttp = require('chai-http');
 chai.use(chaihttp);
 
-require('../server.js');
-
 var expect = chai.expect;
 
 describe('the concierge test', function(){

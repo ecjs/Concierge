@@ -4,8 +4,6 @@ var chaihttp = require('chai-http');
 var moment = require('moment');
 chai.use(chaihttp);
 
-require('../../server');
-
 var expect = chai.expect;
 
 describe('the jobs test', function(){

@@ -6,8 +6,6 @@ var chaihttp = require('chai-http');
 var User = require('../models/user_model.js');
 chai.use(chaihttp);
 
-require('../../server');
-
 var expect = chai.expect;
 
 User.collection.drop(function(err){
@@ -28,7 +26,6 @@ describe('the user test', function(){
         done();
     });
   });
-   //var code = User.collection.find({confirmationCode:res.body.confirmationCode});
 
   it('should create a user', function(done){
     chai.request('https://quiet-dusk-4540.herokuapp.com')
