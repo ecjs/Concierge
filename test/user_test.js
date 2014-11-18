@@ -60,10 +60,10 @@ describe('the user test', function(){
   it('should get a confirmed user', function(done){
     chai.request('https://quiet-dusk-4540.herokuapp.com')
       .post('/confirm')
-      .send(User.findOne())
+      .send({jwt:jwtToken})
       .end(function(err,res){
         expect (err).to.be.eql(null);
-        expect (res.body.confirmationCode).to.be.true;
+        expect (res.body).to.be.true;
       });
   });
 
