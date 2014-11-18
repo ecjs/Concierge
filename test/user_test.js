@@ -6,7 +6,7 @@ var chaihttp = require('chai-http');
 var User = require('../models/user_model.js');
 chai.use(chaihttp);
 
-require('../../server');
+require('../server');
 
 var expect = chai.expect;
 
