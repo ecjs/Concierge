@@ -53,7 +53,7 @@ describe('the user test', function(){
   it('should confirm a user', function(done){
     chai.request('https://quiet-dusk-4540.herokuapp.com')
       .post('/confirm')
-      .set({jwt:jwtToken}) //confirmation code?
+      .set({jwt:jwtToken}) 
       .end(function(err,res){
         expect (err).to.be.eql(null);
         expect (res.body.confirmed).to.be.false;
@@ -67,7 +67,7 @@ describe('the user test', function(){
       .send({jwt:jwtToken})
       .end(function(err,res){
         expect (err).to.be.eql(null);
-        expect (res.body).to.be.true;
+        expect (res.body.confirmed).to.be.false;
       });
   });
 

@@ -20,4 +20,7 @@ module.exports = function(app, jwtauth) {
       });
     });
   });
+  app.get('/confirmed', jwtauth, function(req, res) {
+    res.status(200).json({confirmed: req.user.confirmed});
+  });
 };
