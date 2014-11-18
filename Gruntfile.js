@@ -27,14 +27,9 @@ module.exports = function(grunt) {
         reporter: 'tap'
       },
       src: ['test/user_test.js']
-    },
-    mongo_drop: {
-        test: {
-          uri: process.env.MONGO_URL
     }
-  }
   });
 
-  grunt.registerTask('test', ['jshint', 'jscs', 'simplemocha', 'mongo_drop']);
+  grunt.registerTask('test', ['jshint', 'jscs', 'simplemocha']);
   grunt.registerTask('default',['test']);
 };
