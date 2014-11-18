@@ -1,16 +1,11 @@
 //user test
 
-process.env.MONGO_URL = 'mongodb://concierge:foobar123@ds053190.mongolab.com:53190/concierge';
 var chai = require('chai');
 var chaihttp = require('chai-http');
 var User = require('../models/user_model.js');
 chai.use(chaihttp);
 
 var expect = chai.expect;
-
-// User.collection.drop(function(err){
-//   if(err) throw(err);
-// });
 
 describe('the user test', function(){
   var id;
