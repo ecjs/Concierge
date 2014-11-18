@@ -13,7 +13,7 @@ module.exports = function(grunt) {
     },
 
     jscs: {
-      src: 'server.js',
+      src: ['server.js', 'routes/**/*.js','lib/*.js'],
       options: {
         config: '.jscsrc'
       }
@@ -21,11 +21,11 @@ module.exports = function(grunt) {
 
     simplemocha: {
       options: {
-        timeout: 3000,
-        ignoreLeaks: false,
+        //timeout: 3000,
+        //ignoreLeaks: false,
         reporter: 'tap'
       },
-      src: ['test/**/user_test.js']
+      src: ['test/user_test.js']
     }
   });
 
