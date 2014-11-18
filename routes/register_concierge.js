@@ -56,7 +56,7 @@ module.exports = function(app, jwtauth) {
       user.save(function(err) {
         if (err) return res.status(500).json({message: 'no user found matching that id'});
         console.log('successfully updated concierge to unavailable: ' + user._id);
-        res.status(202).json({conciergeAvailable: true});
+        res.status(202).json({conciergeAvailable: false});
       });
     });
   });
