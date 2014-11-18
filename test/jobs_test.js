@@ -21,7 +21,7 @@ describe('the jobs test', function(){
   var jwtToken;
   var jobdate = moment().utc().add(1, 'days').format();
 
-  before(function (done) {
+  /*before(function (done) {
     chai.request(testUrl)
     .post('/users')
     .send({username:"joe14@example.com",password:"foobar123",phone:"8474775286",name:{first:"joe",last:"elsey"}})
@@ -31,7 +31,7 @@ describe('the jobs test', function(){
       console.log(res.body);
       done();
     });
-  });
+  });*/
 
 // job tests ===============================================
   it('should create a job', function(done){
@@ -41,7 +41,7 @@ describe('the jobs test', function(){
       //.send({jobDate:jobdate, recurring:true})
       .end(function(err, res){
         expect(err).to.eql(null)
-        expect(res.body).to.have.property('_id');
+        expect(res.body).to.;
       });
   });
 
