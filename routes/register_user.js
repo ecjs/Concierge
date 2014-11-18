@@ -9,7 +9,7 @@ var client = twilio(config.accountSid, config.authToken);
 module.exports = function(app) {
 
   app.post('/users', function(req, res) {
-    User.findOne({'username': req.body.username}, function(dbError, dbUser) {
+    User.findOne({username: req.body.username}, function(dbError, dbUser) {
       if (dbError) return res.status(500).send('server error');
       if (dbUser) return res.status(500).send('User with that username already exists');
 
