@@ -1,6 +1,7 @@
 process.env.MONGO_URL = 'mongodb://concierge:foobar123@ds053190.mongolab.com:53190/concierge';
 var chai = require('chai');
 var chaihttp = require('chai-http');
+var User = require('../models/user_model.js');
 chai.use(chaihttp);
 
 require('../../server');
@@ -14,7 +15,7 @@ describe('the user test', function(){
   before(function (done) {
     chai.request('https://quiet-dusk-4540.herokuapp.com')
       .post('/users')
-      .send("joe1234","foobar123","8474775286","joe","elsey")
+      .send({username:"joe1234",password:"foobar123",phone:"8474775286",name:{first:"joe",last:"elsey"}})
       .end(function (err, res) {
         jwtToken = res.body.jwt;
         done();
@@ -24,7 +25,7 @@ describe('the user test', function(){
   it('should create a user', function(done){
     chai.request('https://quiet-dusk-4540.herokuapp.com')
       .post('/users')
-      .send("joe7890","foobar123","8474775286","joe","elsey") //or confirmation code?
+      .send({username:"joe1234",password:"foobar123",phone:"8474775286",name:{first:"joe",last:"elsey"}}) //or confirmation code?
       .end(function(err, res){
         expect (err).to.be.eql(null);
         expect (res.body).to.have.property('jwt');
@@ -35,10 +36,10 @@ describe('the user test', function(){
   it('should get a user', function(done){
     chai.request('https://quiet-dusk-4540.herokuapp.com')
       .get('/users')
-      .auth()   //jwt or confirmation code?
+      .auth("joe1234","foobar123")   //jwt or confirmation code?
       .end(function(err,res){
         expect (err).to.be.eql(null);
-        expect (res.body).to.be.eql('jwt');
+        expect (res.body).to.have.property('jwt');
         done();
       });
     });
@@ -46,10 +47,10 @@ describe('the user test', function(){
   it('should confirm a user', function(done){
     chai.request('https://quiet-dusk-4540.herokuapp.com')
       .post('/confirm')
-      .auth() //confirmation code?
+      .auth({"joe1234","foobar123"}) //confirmation code?
       .end(function(err,res){
         expect (err).to.be.eql(null);
-        expect (res.body).to.have.property('_id');
+        expect (res.body).to.be.true;
         done();
       }); 
     });
