@@ -25,7 +25,7 @@ module.exports = function(grunt) {
         //ignoreLeaks: false,
         reporter: 'tap'
       },
-      src: ['test/user_test.js', 'test/concierge_test.js']
+      src: [/*'test/user_test.js', 'test/concierge_test.js',*/'test/jobs_test.js']
     }
   });
 
