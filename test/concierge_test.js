@@ -3,7 +3,7 @@ var chai = require('chai');
 var chaihttp = require('chai-http');
 chai.use(chaihttp);
 
-require('../../server');
+require('../server.js');
 
 var expect = chai.expect;
 
@@ -20,7 +20,7 @@ describe('the concierge test', function(){
       done();
     });
   });
- 
+
 
   it('should create a concierge', function(done){
     chai.request('https://quiet-dusk-4540.herokuapp.com')
