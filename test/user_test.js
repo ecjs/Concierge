@@ -24,7 +24,7 @@ describe('the user test', function(){
   it('should create a user', function(done){
     chai.request('https://quiet-dusk-4540.herokuapp.com')
       .post('/users')
-      .set({jwt: jwtToken}) //or confirmation code?
+      .send({jwt: jwtToken}) //or confirmation code?
       .end(function(err, res){
         expect (err).to.be.eql(null);
         expect (res.body).to.have.property('jwt');
