@@ -15,7 +15,7 @@ module.exports = function(app, jwtauth) {
       user.confirmationCode = randomCode;
       user.save(function(err) {
         if (err) { return (err); }
-        client.sendMessage({ to: user.phone, from: config.twilioNumber, body:'Here is your Concierge confirmation number: ' + user.confirmationCode }, function(err) {
+        client.sendMessage({ to: user.phone, from: config.twilioNumber, body:'Resending concierge confirmation number: ' + user.confirmationCode }, function(err) {
           if (err) console.log('confirmation code could not be sent.');
         });
         return res.status(202).json(user);
