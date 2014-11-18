@@ -14,7 +14,7 @@ describe('the user test', function(){
   before(function (done) {
     chai.request('https://quiet-dusk-4540.herokuapp.com')
       .post('/users')
-      .send("JoeFellsey","foobar123","8474775286",{"Joe","Fellsey"})
+      .send("joe1234","foobar123","8474775286",{"joe","elsey"})
       .end(function (err, res) {
         jwtToken = res.body.jwt;
         done();
@@ -24,7 +24,7 @@ describe('the user test', function(){
   it('should create a user', function(done){
     chai.request('https://quiet-dusk-4540.herokuapp.com')
       .post('/users')
-      .send("JoeDwellsey","foobar123","8474775286",{"Joe","Dwellsey"}) //or confirmation code?
+      .send("joe7890","foobar123","8474775286",{"joe","elsey"}) //or confirmation code?
       .end(function(err, res){
         expect (err).to.be.eql(null);
         expect (res.body).to.have.property('jwt');
