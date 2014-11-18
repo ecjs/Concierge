@@ -2,8 +2,8 @@
 var superagent = require('superagent');
 var agent = superagent.agent();
 
-module.exports = function(app, jwtauth) {
-  app.get('/samplePopulate', jwtauth, function(req, res) {
+module.exports = function(app) {
+  app.get('/samplePopulate', function(req, res) {
     agent
     .post('/user')
     .send({username: 'test@example.com', password: 'foobar123', name: {first:'Mark', last: 'Harrell'}, phone: '5555555555'})
