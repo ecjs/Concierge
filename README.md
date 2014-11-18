@@ -1,6 +1,6 @@
 Concierge
 =========
-
+<img src='https://travis-ci.org/joeelsey/Concierge.svg?branch=dev'/>
 Mobile wake up call service with a real person.
 - User signs up with Facebook, enters their phone number.  
 - We verify their number.  
@@ -10,3 +10,4 @@ Mobile wake up call service with a real person.
 - Once a user signs up, they can also choose to become a Concierge.  
 - They enter in their Name, phone number, location, and then they record a message as a try out for the job.
 - Once finished it sends the recording plus user information straight into the database.  Later accessible via admin.
+

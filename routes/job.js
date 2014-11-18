@@ -34,4 +34,5 @@ module.exports = function(app, jwtauth) {
       res.json(jobs);
     });
   });
+
 };

@@ -24,11 +24,10 @@ module.exports = function(app) {
       client.sendMessage({ to: user.phone, from: config.twilioNumber, body:'Here is your Concierge confirmation number: ' + user.confirmationCode }, function(err) {
         if (err) console.log('confirmation code could not be sent.');
       });
-      res.json({'jwt': user.generateToken(app.get('jwtSecret'))});
+      res.json({jwt: user.generateToken(app.get('jwtSecret'))});
     });
   });
   app.get('/users', authController.isAuthenticated, function(req, res) {
-    res.json({'jwt': req.user.generateToken(app.get('jwtSecret'))});
-
+    res.json({jwt: req.user.generateToken(app.get('jwtSecret'))});
   });
 };
