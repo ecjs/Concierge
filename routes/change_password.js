@@ -7,7 +7,7 @@ module.exports = function(app, jwtauth) {
     User.findOne({username: req.user.username}, function(err, user) {
       if (err) return res.status(500).send('there was an error' + err);
       user.password = req.body.password;
-      user.save(function(err, data) {
+      user.save(function(err) {
         if (err) return res.status(500).send('there was an error' + err);
       });
       res.json({jwt: req.user.generateToken(app.get('jwtSecret'))});
