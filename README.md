@@ -1,5 +1,6 @@
 Concierge
 =========
+[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/ecjs/Concierge?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 Mobile wake up call service with a real person.
 - User signs up with Facebook, enters their phone number.  
