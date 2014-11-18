@@ -5,17 +5,17 @@ var random = require('mongoose-simple-random');
 
 var UserSchema = mongoose.Schema({
   username: {
-    type: String
+    type: String, required: true
   },
   password: {
-    type: String
+    type: String, required: true
   },
   phone: {
-    type: String
+    type: String, required: true
   },
   name: {
-    first:{type: String},
-    last:{type: String}
+    first:{type: String, required: true},
+    last:{type: String, required: true}
   },
   confirmed: {
     type: Boolean
