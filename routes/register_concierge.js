@@ -73,7 +73,7 @@ module.exports = function(app, jwtauth) {
         return res.status(500).json({message: 'no concierge found matching that id'});
       }
       jobsArray = jobs.conciergeJobs;
-      console.log(jobs);
+      console.log(jobs.conciergeJobs);
       Jobs.find({_id: {$in: jobsArray}}, function(err, conciergeDocs) {
         if (err) return res.status(500).json({message: 'error finding concierge jobs'});
         if (jobs === null) return res.status(500).json({message: 'no jobs found for concierge'});
