@@ -52,17 +52,20 @@ User.collection.remove(function(err){
         });
     });
 
-    it('should change a password', function(done){
+    it('should reset a password', function(done){
       chai.request(testUrl)
-        .get('/changePassword')
+        .get('/passwordReset')
         .set({jwt:jwtToken})
-        .send({username:'joe10@example.com'})
         .end(function(err,res){
           expect(err).to.eql(null);
-          expect(res.body).to.have.property('jwt');
+          expect(res.body).to.have.property('tempPass');
           done();
         });
     });
+
+    it('should change a password', function(done){
+      
+    })
   });
 
 
