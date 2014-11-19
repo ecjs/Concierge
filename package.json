@@ -4,6 +4,7 @@
   "description": "Mobile wake up call service.",
   "main": "server.js",
   "scripts": {
+    "start":"node server.js",
     "test": "node_modules/grunt-cli/bin/grunt"
   },
   "repository": {
