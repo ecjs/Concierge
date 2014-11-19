@@ -62,19 +62,18 @@ module.exports = function(app, jwtauth) {
     });
   });
   app.get('/concierge', jwtauth, function(req, res) {
-    res.json(req.body);
-    User.findOne({_id: req.user._id}).lean().exec(function(err, jobs) {
+    User.findOne({_id: req.user._id}).lean().exec(function(err, user) {
       if (err) {
         console.log('error finding concierge: ' + err);
         return res.status(500).json({message: 'error finding concierge'});
       }
-      if (jobs === null) {
+      if (user === null) {
         console.log('no concierge found matching that id');
         return res.status(500).json({message: 'no concierge found matching that id'});
       }
-      jobQueue.find({_id: { $in: jobs.conciergeJobs}}, function(err, docs) {
+      jobQueue.find({_id: { $in: user.conciergeJobs}}, function(err, docs) {
         if (err) return res.status(500).json({message: 'error finding concierge jobs'});
-        if (jobs === null) return res.status(500).json({message: 'no jobs found for concierge'});
+        if (docs.length === 0) return res.status(500).json({message: 'no jobs found for concierge'});
         res.status(200).send(docs);
       });
     });

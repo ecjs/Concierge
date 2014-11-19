@@ -34,7 +34,7 @@ describe('the user test', function(){
       .post('/users')
       .send({username:"joe2@example.com",password:"Foobar123",phone:"8474775286",name:{first:"joe",last:"elsey"}})
       .end(function(err, res){
-        expect (err).to.be.eql(null);
+        expect (err).to.eql(null);
         expect (res.body).to.have.property('jwt');
         id = res.body._id;
         done();
@@ -46,7 +46,7 @@ describe('the user test', function(){
       .get('/users')
       .send({jwt:jwtToken})
       .end(function(err,res){
-        expect (err).to.be.eql(null);
+        expect (err).to.eql(null);
         expect (res.body).to.be.Object; //can't currently test the alert window.
         done();
     });
@@ -57,7 +57,7 @@ describe('the user test', function(){
       .post('/confirm')
       .set({jwt:jwtToken})
       .end(function(err,res){
-        expect (err).to.be.eql(null);
+        expect (err).to.eql(null);
         expect (res.body.confirmed).to.be.false;
         done();
     });
@@ -65,10 +65,10 @@ describe('the user test', function(){
 
   it('should get a confirmed user', function(done){
     chai.request(testUrl)
-      .post('/confirm')
+      .get('/confirmed')
       .set({jwt:jwtToken})
       .end(function(err,res){
-        expect (err).to.be.eql(null);
+        expect (err).to.eql(null);
         expect (res.body.confirmed).to.be.false;
         done();
     });

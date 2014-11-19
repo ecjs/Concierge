@@ -19,7 +19,7 @@ User.collection.remove(function(err){
     var jwtToken;
 
     before(function (done) {
-    chai.request('http://localhost:3000')
+    chai.request(testUrl)
       .post('/users')
       .send({username:"joe10@example.com",password:"Foobar123",phone:"8474775286",name:{first:"joe",last:"elsey"}})
       .end(function (err, res) {
@@ -44,10 +44,10 @@ User.collection.remove(function(err){
       chai.request(testUrl)
         .put('/changePhone')
         .set({jwt:jwtToken})
-        .send('546bfed2bacbe63f2280c943')
+        .send({phone:'7736569341'})
         .end(function(err,res){
           expect(err).to.eql(null);
-          expect(res.body).to.be.json;
+          expect(res.body).to.have.property('phone');
           done();
         });
     });
@@ -67,7 +67,7 @@ User.collection.remove(function(err){
       chai.request(testUrl)
         .put('/changePassword')
         .set({jwt:jwtToken})
-        .send({username:'joe10@example.com'})
+        .send({password:'Fooboo124'})
         .end(function(err,res){
           expect(err).to.eql(null);
           expect(res.body).to.have.property('jwt');
