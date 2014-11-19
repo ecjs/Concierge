@@ -3,7 +3,7 @@
 var User = require('../models/user_model');
 var sendgrid = require('sendgrid')(process.env.API_USER, process.env.API_KEY);
 
-module.exports = function(app, jwtauth) {
+module.exports = function(app) {
   var generatePassword = function() {
     var length = 8;
     var charset = 'abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
