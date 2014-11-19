@@ -72,13 +72,13 @@ module.exports = function(app, jwtauth) {
         console.log('no concierge found matching that id');
         return res.status(500).json({message: 'no concierge found matching that id'});
       }
-      jobsArray = jobs.conciergeJobs;
-      console.log(jobs);
-      jobQueue.find({'id_': { $in: ['546c2d6c3fa04e02000f3ca5', '546c2d6c3fa04e02000f3ca6']}}, function(err, docs) {
-        if (err) return res.status(500).json({message: 'error finding concierge jobs'});
-        if (jobs === null) return res.status(500).json({message: 'no jobs found for concierge'});
-        res.status(200).send(docs);
-      });
+      jobsArray = jobs.conciergeJobs.toObject();
+      console.log(jobsArray);
+      // jobQueue.findById({'id_': { $in: ['546c2d6c3fa04e02000f3ca5', '546c2d6c3fa04e02000f3ca6']}}, function(err, docs) {
+      //   if (err) return res.status(500).json({message: 'error finding concierge jobs'});
+      //   if (jobs === null) return res.status(500).json({message: 'no jobs found for concierge'});
+      //   res.status(200).send(docs);
+      // });
     });
   });
 };
