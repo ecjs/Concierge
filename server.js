@@ -29,7 +29,6 @@ require('./routes/change_password')(app, jwtauth);
 require('./routes/change_phone')(app, jwtauth);
 require('./routes/change_username')(app, jwtauth);
 require('./routes/password_reset')(app);
-require('./routes/user_jobs')(app, jwtauth);
 require('./routes/concierge_jobs')(app, jwtauth);
 
 app.use(function(req, res, next) {
