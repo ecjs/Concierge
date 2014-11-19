@@ -49,8 +49,8 @@ describe('the jobs test', function(){
       .get('/jobs')
       .send({jwt:jwtToken})
       .end(function(err,res){
-        expect(err).to.be(null);
-        expect(res.body).to.have.property('_id');
+        expect(err).to.eql(null);
+        expect(Array.isArray(res.body)).to.be.true;
         done();
       });
   });
