@@ -1,6 +1,7 @@
 'use strict';
 
 var User = require('../models/user_model');
+var Jobs = require('../models/jobs_model');
 
 module.exports = function(app, jwtauth) {
   app.post('/concierge', jwtauth, function(req, res) {
@@ -61,6 +62,22 @@ module.exports = function(app, jwtauth) {
     });
   });
   app.get('/concierge', jwtauth, function(req, res) {
-    res.json(req.body.name);
+    var jobsArray;
+    User.find({_id: req.user._id}, function(err, jobs) {
+      if (err) {
+        console.log('error finding concierge: ' + err);
+        return res.status(500).json({message: 'error finding concierge'});
+      }
+      if (jobs === null) {
+        console.log('no concierge found matching that id');
+        return res.status(500).json({message: 'no concierge found matching that id'});
+      }
+      jobsArray = jobs.conciergeJobs;
+      Jobs.find({_id: {$in: jobsArray}}, function(err, conciergeDocs) {
+        if (err) return res.status(500).json({message: 'error finding concierge jobs'});
+        if (jobs === null) return res.status(500).json({message: 'no jobs found for concierge'});
+        res.status(200).json(conciergeDocs);
+      });
+    });
   });
 };
