@@ -1,19 +1,20 @@
 //concierge test
 
-//process.env.MONGO_URL = 'mongodb://concierge:foobar123@ds053190.mongolab.com:53190/concierge';
+process.env.MONGO_URL = 'mongodb://localhost/users_test';
 var chai = require('chai');
 var chaihttp = require('chai-http');
 chai.use(chaihttp);
 
 var expect = chai.expect;
+var testUrl = 'http://localhost:3000';
 
 describe('the concierge test', function(){
   var jwtToken;
 
   before(function (done) {
-    chai.request('https://quiet-dusk-4540.herokuapp.com')
+    chai.request(testUrl)
     .post('/users')
-    .send({username:"fred1234",password:"foobar123",phone:"8474775286",name:{first:"joe",last:"elsey"}})
+    .send({username:"joe5@example.com",password:"Foobar123",phone:"8474775286",name:{first:"joe",last:"elsey"}})
     .end(function (err, res) {
       jwtToken = res.body.jwt;
       done();
@@ -21,7 +22,7 @@ describe('the concierge test', function(){
   });
 
   it('should create a concierge', function(done){
-    chai.request('https://quiet-dusk-4540.herokuapp.com')
+    chai.request(testUrl)
     .post('/concierge')
     .send({jwt:jwtToken})
     .end(function(err,res){
@@ -32,7 +33,7 @@ describe('the concierge test', function(){
   });
 
   it('should notify a concierge is available', function(done){
-    chai.request('https://quiet-dusk-4540.herokuapp.com')
+    chai.request(testUrl)
       .post('/conciergeAvailable')
       .send({jwt:jwtToken})
       .end(function(err,res){
@@ -43,7 +44,7 @@ describe('the concierge test', function(){
     });
 
   it('should notify a concierge is unavailable', function(done){
-    chai.request('https://quiet-dusk-4540.herokuapp.com')
+    chai.request(testUrl)
       .post('/conciergeUnavailable')
       .send({jwt:jwtToken})
       .end(function(err,res){
@@ -54,12 +55,12 @@ describe('the concierge test', function(){
     });
 
   it('should get a concierge', function(done){
-    chai.request('https://quiet-dusk-4540.herokuapp.com')
+    chai.request(testUrl)
       .get('/concierge')
       .send({jwt:jwtToken})
       .end(function(err,res){
         expect(err).to.be.eql(null);
-        expect(res.body).to.have.property('jwt');
+        expect(res.body).to.be.Object;
         done();
       });
     });
