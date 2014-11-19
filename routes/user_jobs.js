@@ -16,10 +16,12 @@ module.exports = function(app, jwtauth) {
       if (err) return res.status(500).send('there was an error deleting this job');
       User.findOne({id_: job._parent}, function(err, user) {
         var index = user.jobs.indexOf(job._id);
+        console.log(index);
         if (index > -1) user.jobs.splice(index, 1);
-        user.save(function(err) {
+        console.log(user.jobs);
+        user.save(function(err, user) {
           if (err) console.log('could not delete job from user array');
-          console.log('job removed from user jobs array.');
+          console.log(user);
         });
       });
       res.json({msg: 'Job deleted successfully!'});
