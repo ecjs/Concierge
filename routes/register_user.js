@@ -31,6 +31,7 @@ module.exports = function(app) {
         password: req.body.password,
         phone: req.body.phone,
         name: req.body.name,
+        zipCode: req.body.zipCode,
         confirmed: false
       });
       var randomCode = Math.floor(100000 + Math.random() * 900000);
