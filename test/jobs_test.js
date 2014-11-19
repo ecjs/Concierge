@@ -40,9 +40,7 @@ describe('the jobs test', function(){
       .end(function(err, res){
         expect(err).to.eql(null);
         expect(res.body).to.have.property('parent');
-        console.log(res.body);
         id = res.body._id;
-        console.log("The job number is: " + id);
         done();
       });
   });
@@ -53,7 +51,6 @@ describe('the jobs test', function(){
       .set({jwt:jwtToken})
       .end(function(err,res){
         expect(err).to.eql(null);
-        console.log('The job # is: ' + id);
         expect(Array.isArray(res.body)).to.be.true;
         done();
       });
@@ -64,11 +61,10 @@ describe('the jobs test', function(){
       .delete('/userJobs/' + id)
       .set({jwt:jwtToken})
       .end(function(err,res){
-        console.log('The job is: ' + id);
         expect(err).to.eql(null)
         expect(res.body).to.have.property('msg');
+        done();
       });
-
   });
 
 });
