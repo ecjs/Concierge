@@ -54,11 +54,11 @@ User.collection.remove(function(err){
 
     it('should reset a password', function(done){
       chai.request(testUrl)
-        .get('/passwordReset')
+        .post('/passwordReset')
         .send({username:"joe10@example.com"})
         .end(function(err,res){
           expect(err).to.eql(null);
-          expect(res.body).to.have.property('tempPass');
+          expect(res.body).to.have.property('message');
           done();
         });
     });
