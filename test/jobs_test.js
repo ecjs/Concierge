@@ -1,10 +1,10 @@
 //jobs test
-
-process.env.MONGO_URL = 'mongodb://localhost/jobs_test';
+process.env.MONGO_URL = 'mongodb://localhost/users_test';
 var chai = require('chai');
 var chaihttp = require('chai-http');
 var User = require('../models/user_model');
 var moment = require('moment');
+
 chai.use(chaihttp);
 
 require('../server');
@@ -21,27 +21,26 @@ describe('the jobs test', function(){
   var jwtToken;
   var jobdate = moment().utc().add(1, 'days').format();
 
-  /*before(function (done) {
+  before(function (done) {
     chai.request(testUrl)
     .post('/users')
-    .send({username:"joe14@example.com",password:"foobar123",phone:"8474775286",name:{first:"joe",last:"elsey"}})
+    .send({username:"joe3@example.com",password:"Foobar123",phone:"8474775286",name:{first:"joe",last:"elsey"}})
     .end(function (err, res) {
-      console.log(err);
       jwtToken = res.body.jwt;
-      console.log(res.body);
       done();
     });
-  });*/
+  });
 
 // job tests ===============================================
   it('should create a job', function(done){
     chai.request(testUrl)
       .post('/jobs')
-      .send({jwt:jwtToken})
-      //.send({jobDate:jobdate, recurring:true})
+      .set({jwt:jwtToken})
+      .send(jobdate, true)
       .end(function(err, res){
         expect(err).to.eql(null)
-        expect(res.body).to.;
+        expect(res.body).to.have.property('parent')
+        done();
       });
   });
 
@@ -51,7 +50,8 @@ describe('the jobs test', function(){
       .send({jwt:jwtToken})
       .end(function(err,res){
         expect(err).to.be(null);
-        expect(res.body).to.have.property('parent');
+        expect(res.body).to.have.property('_id');
+        done();
       });
   });
 

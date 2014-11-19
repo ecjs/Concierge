@@ -3,6 +3,7 @@ process.env.MONGO_URL = 'mongodb://localhost/users_test';
 var chai = require('chai');
 var chaihttp = require('chai-http');
 var User = require('../models/user_model');
+var Jobs = require('../models/jobs_model');
 chai.use(chaihttp);
 
 require('../server');
