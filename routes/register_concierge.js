@@ -74,10 +74,10 @@ module.exports = function(app, jwtauth) {
       }
       jobsArray = jobs.conciergeJobs;
       console.log(jobs);
-      Jobs.find({_id: ['546c2d6c3fa04e02000f3ca5', '546c2d6c3fa04e02000f3ca6']}, function(err, conciergeDocs) {
+      Jobs.find({'_id': { $in: ['546c2d6c3fa04e02000f3ca5', '546c2d6c3fa04e02000f3ca6']}}, function(err, docs) {
         if (err) return res.status(500).json({message: 'error finding concierge jobs'});
         if (jobs === null) return res.status(500).json({message: 'no jobs found for concierge'});
-        res.status(200).json(conciergeDocs);
+        res.status(200).json(docs);
       });
     });
   });
