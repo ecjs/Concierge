@@ -4,7 +4,6 @@ var chai = require('chai');
 var chaihttp = require('chai-http');
 var User = require('../models/user_model');
 var moment = require('moment');
-
 chai.use(chaihttp);
 
 require('../server');
