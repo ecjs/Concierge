@@ -2,7 +2,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-jscs');
   grunt.loadNpmTasks('grunt-simple-mocha');
-  //grunt.loadNpmTasks('grunt-mongo-drop');
 
   grunt.initConfig({
     jshint: {
@@ -23,22 +22,15 @@ module.exports = function(grunt) {
     simplemocha: {
       options: {
         timeout: 3000,
-        //ignoreLeaks: false,
         reporter: 'tap'
       },
-
 
       src: ['test/user_test.js','test/concierge_test.js','test/change_test.js','test/jobs_test.js']
 
     }
-    /*mongo_drop: {
-        test: {
-          uri: process.env.MONGO_URL
-
-    }
-  }*/
+  
   });
 
-  grunt.registerTask('test', ['jshint', 'jscs', 'simplemocha', /*'mongo_drop'*/]);
+  grunt.registerTask('test', ['jshint', 'jscs', 'simplemocha']);
   grunt.registerTask('default',['test']);
 };
