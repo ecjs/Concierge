@@ -9,7 +9,8 @@ var JobSchema = mongoose.Schema({
     last: String
   },
   parentNumber: { type: String },
-  optionsList: [],
+  optionsList: [{
+    weather:{ type: String}}],
   recurring: { type: Boolean }
 });
 
