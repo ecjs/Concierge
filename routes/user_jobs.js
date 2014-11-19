@@ -11,7 +11,7 @@ module.exports = function(app, jwtauth) {
     });
   });
 
-  app.delete('/userJobs/:id', function(req, res) {
+  app.delete('/userJobs/:id', jwtauth, function(req, res) {
     Job.remove({_id: req.params.id}, function(err) {
       if (err) return res.status(500).send('there was an error deleting this job');
       res.json({msg: 'Job deleted successfully!'});
