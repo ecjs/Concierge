@@ -20,6 +20,7 @@ module.exports = function(app) {
     if (!regex.test(req.body.password)) {
       return res.status(500).send('password needs one number, lowercase, and uppercase letter and must be at least six characters');
     }
+
     User.findOne({username: req.body.username}, function(dbError, dbUser) {
       if (dbError) return res.status(500).send('server error');
       //check if user already exists
@@ -40,7 +41,7 @@ module.exports = function(app) {
         console.log('to:', user.phone, 'from:', config.twilioNumber, 'code:', user.confirmationCode);
         // Check if user.phone matches the correct pattern (valid phone, does not start with +)
         client.sendMessage({ to: user.phone, from: config.twilioNumber, body:'Here is your Concierge confirmation number: ' + user.confirmationCode }, function(err2) {
-          if (err2) return res.status(500).send('confirmation code could not be sent.');
+          if (err2) return console.log('confirmation code could not be sent.' + err2);
         });
       });
       res.json({jwt: user.generateToken(app.get('jwtSecret'))});
