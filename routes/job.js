@@ -5,8 +5,8 @@ var User = require('../models/user_model');
 
 module.exports = function(app, jwtauth) {
   app.post('/jobs', jwtauth, function(req, res) {
-    console.log(req.user);
-    console.log(req.user.name);
+    console.log('the user for this job post is: ' + req.user);
+    console.log('the users name for this job post is: ' + req.user.name);
     var newJob = new Job({
       jobDate: req.body.jobDate,
       parent: req.user._id,
