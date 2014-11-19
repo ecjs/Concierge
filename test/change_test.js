@@ -42,7 +42,7 @@ User.collection.remove(function(err){
 
     it('should change a phone number', function(done){
       chai.request(testUrl)
-        .post('/changePhone')
+        .put('/changePhone')
         .set({jwt:jwtToken})
         .send('546bfed2bacbe63f2280c943')
         .end(function(err,res){
@@ -64,8 +64,16 @@ User.collection.remove(function(err){
     });
 
     it('should change a password', function(done){
-      
-    })
+      chai.request(testUrl)
+        .put('/changePassword')
+        .set({jwt:jwtToken})
+        .send({username:'joe10@example.com'})
+        .end(function(err,res){
+          expect(err).to.eql(null);
+          expect(res.body).to.have.property('jwt');
+          done();
+        });
+    });
   });
 
 
