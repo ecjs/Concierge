@@ -5,6 +5,8 @@ var bodyParser = require('body-parser');
 var config = require('./config');
 var mongoose = require('mongoose');
 var passport = require('passport');
+var CronJob = require('cron').CronJob;
+var jobManager = require('./lib/jobManager.js');
 
 var app = express();
 
@@ -38,3 +40,15 @@ app.use(function(req, res, next) {
 app.listen(config.port);
 
 console.log('Concierge magic starts here..on port: ' + config.port);
+
+var jobCheckCron = new CronJob('0 * * * * *', function() {
+  jobManager.checkJobs();
+  console.log('Checking jobs to move to the Queue');
+}, null, false, 'America/Los_Angeles');
+
+var jobQueueCheckCron = new CronJob('0 * * * * *', function() {
+  jobManager.checkQueue();
+  console.log('Checking jobs to send to Twilio');
+}, null, false, 'America/Los_Angeles');
+jobCheckCron.start();
+jobQueueCheckCron.start();
