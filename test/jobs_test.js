@@ -31,7 +31,6 @@ describe('the jobs test', function(){
     });
   });
 
-// job tests ===============================================
   it('should create a job', function(done){
     chai.request(testUrl)
       .post('/jobs')

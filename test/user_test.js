@@ -47,7 +47,7 @@ describe('the user test', function(){
       .send({jwt:jwtToken})
       .end(function(err,res){
         expect (err).to.eql(null);
-        expect (res.body).to.be.Object; //can't currently test the alert window.
+        expect (res.body).to.be.Object;
         done();
     });
   });
