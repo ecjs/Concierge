@@ -75,5 +75,3 @@ User.collection.remove(function(err){
         });
     });
   });
-
-
