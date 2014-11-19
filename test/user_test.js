@@ -74,4 +74,15 @@ describe('the user test', function(){
     });
   });
 
+  it('should resend the confirmation code', function(done){
+    chai.request(testUrl)
+      .post('/resendConfirmation')
+      .set({jwt:jwtToken})
+      .end(function(err,res){
+        expect(err).to.eql(null);
+        expect(res.body).to.have.property('_id');
+        done();
+      });
+  });
+
 });
