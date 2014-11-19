@@ -16,9 +16,9 @@ User.collection.remove(function(err){
 });
 
 describe('the jobs test', function(){
-
   var jwtToken;
   var jobdate = moment().utc().add(1, 'days').format();
+  var id;
 
   before(function (done) {
     chai.request(testUrl)
@@ -39,6 +39,8 @@ describe('the jobs test', function(){
       .end(function(err, res){
         expect(err).to.eql(null)
         expect(res.body).to.have.property('parent')
+        id = res.body._id;
+        console.log(id);
         done();
       });
   });
@@ -46,12 +48,23 @@ describe('the jobs test', function(){
   it('should get a job', function(done){
     chai.request(testUrl)
       .get('/jobs')
-      .send({jwt:jwtToken})
+      .set({jwt:jwtToken})
       .end(function(err,res){
         expect(err).to.eql(null);
         expect(Array.isArray(res.body)).to.be.true;
         done();
       });
+  });
+
+  it('should delete a job', function(done){
+    chai.request(testUrl)
+      .delete('/userJobs/' + id)
+      .set({jwt:jwtToken})
+      .end(function(err,res){
+        expect(err).to.eql(null)
+        expect(res.body).to.have.property('msg');
+      });
+
   });
 
 });
