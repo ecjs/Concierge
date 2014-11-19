@@ -4,7 +4,6 @@ var chai = require('chai');
 var chaihttp = require('chai-http');
 var User = require('../models/user_model');
 var moment = require('moment');
-
 chai.use(chaihttp);
 
 require('../server');
@@ -22,7 +21,7 @@ User.collection.remove(function(err){
     before(function (done) {
     chai.request('http://localhost:3000')
       .post('/users')
-      .send({username:"joe4@example.com",password:"Foobar123",phone:"8474775286",name:{first:"joe",last:"elsey"}})
+      .send({username:"joe10@example.com",password:"Foobar123",phone:"8474775286",name:{first:"joe",last:"elsey"}})
       .end(function (err, res) {
         jwtToken = res.body.jwt;
         done();
@@ -32,7 +31,8 @@ User.collection.remove(function(err){
     it('should change a username', function(done){
       chai.request(testUrl)
         .put('/changeUsername')
-        .send({jwt:jwtToken})
+        .set({jwt:jwtToken})
+        .send({username:'joe10@example.com'})
         .end(function(err,res){
           expect(err).to.eql(null);
           expect(res.body).to.have.property('jwt');
@@ -43,8 +43,8 @@ User.collection.remove(function(err){
     it('should change a phone number', function(done){
       chai.request(testUrl)
         .post('/changePhone')
-        //.set({jwt:jwtToken})
-        .send('8725885946')
+        .set({jwt:jwtToken})
+        .send('546bfed2bacbe63f2280c943')
         .end(function(err,res){
           expect(err).to.eql(null);
           expect(res.body).to.be.json;
@@ -54,16 +54,15 @@ User.collection.remove(function(err){
 
     it('should change a password', function(done){
       chai.request(testUrl)
-        .put('/changePassword')
-        .send({jwt:jwtToken})
+        .get('/changePassword')
+        .set({jwt:jwtToken})
+        .send({username:'joe10@example.com'})
         .end(function(err,res){
           expect(err).to.eql(null);
           expect(res.body).to.have.property('jwt');
           done();
         });
     });
-
-
   });
 
 
