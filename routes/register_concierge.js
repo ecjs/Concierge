@@ -62,7 +62,7 @@ module.exports = function(app, jwtauth) {
     });
   });
   app.get('/concierge', jwtauth, function(req, res) {
-    User.find({_id: req.user._id}).lean().exec(function(err, jobs) {
+    User.findOne({_id: req.user._id}).lean().exec(function(err, jobs) {
       if (err) {
         console.log('error finding concierge: ' + err);
         return res.status(500).json({message: 'error finding concierge'});
