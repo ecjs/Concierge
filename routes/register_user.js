@@ -20,6 +20,7 @@ module.exports = function(app) {
     if (!regex.test(req.body.password)) {
       return res.status(500).send('password needs one number, lowercase, and uppercase letter and must be at least six characters');
     }
+
     User.findOne({username: req.body.username}, function(dbError, dbUser) {
       if (dbError) return res.status(500).send('server error');
       //check if user already exists

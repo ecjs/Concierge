@@ -4,9 +4,9 @@ var User = require('../models/user_model');
 
 module.exports = function(app, jwtauth) {
   var generatePassword = function() {
-    var length = 8,
-        charset = 'abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789',
-        retVal = '';
+    var length = 8;
+    var charset = 'abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    var retVal = '';
     for (var i = 0, n = charset.length; i < length; ++i) {
       retVal += charset.charAt(Math.floor(Math.random() * n));
     }

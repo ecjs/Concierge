@@ -1,54 +1,59 @@
-process.env.MONGO_URL = 'mongodb://concierge:foobar123@ds053190.mongolab.com:53190/concierge';
+//jobs test
+process.env.MONGO_URL = 'mongodb://localhost/users_test';
 var chai = require('chai');
 var chaihttp = require('chai-http');
+var User = require('../models/user_model');
 var moment = require('moment');
+
 chai.use(chaihttp);
 
+require('../server');
+
 var expect = chai.expect;
+var testUrl = 'http://localhost:3000';
+
+User.collection.remove(function(err){
+  if(err) throw(err);
+});
 
 describe('the jobs test', function(){
-  var id;
+  
   var jwtToken;
-  var date = moment().utc().add(1, 'days').format();
+  var jobdate = moment().utc().add(1, 'days').format();
 
   before(function (done) {
-    chai.request('https://quiet-dusk-4540.herokuapp.com')
-    .post('/call')
-    .send({email: 'test@example.com', password: 'foobar123'})
+    chai.request(testUrl)
+    .post('/users')
+    .send({username:"joe3@example.com",password:"Foobar123",phone:"8474775286",name:{first:"joe",last:"elsey"}})
     .end(function (err, res) {
-      console.log(err);
       jwtToken = res.body.jwt;
       done();
     });
   });
 
-  before(function (done){
-    chai.request('https://quiet-dusk-4540.herokuapp.com')
-    .post('/jobs')
-    .send({jobDate:date, parent: jwtToken, recurring:true, parentName:{first:'Joe',last:'Elsey'}, parentNumber:'8474775286'});
-    .end(function (err,res){
-      console.log(err);
-
-      done();
-    })
-  })
-
-  it('should make a call', function(done){
-    chai.request('https://quiet-dusk-4540.herokuapp.com/')
-      .post('/outbound/:firstName/:lastName/:phoneNumber/')
-      .send({'joe','elsey','8474775286' })
+// job tests ===============================================
+  it('should create a job', function(done){
+    chai.request(testUrl)
+      .post('/jobs')
+      .set({jwt:jwtToken})
+      .send(jobdate, true)
       .end(function(err, res){
-        expect(err).to.be(null)
-        expect(res.body).to.have.property('_id')
+        expect(err).to.eql(null)
+        expect(res.body).to.have.property('parent')
+        done();
       });
   });
 
-  it('should create a job', function(done){
-    chai.request('https://quiet-dusk-4540.herokuapp.com/')
-      .post('/jobs')
-      .send({jobDate:'11/29/14', parent: jwtToken, recurring:true, parentName:{first:'Joe',last:'Elsey'}, parentNumber:'8474775286'}))
-  })
-
+  it('should get a job', function(done){
+    chai.request(testUrl)
+      .get('/jobs')
+      .send({jwt:jwtToken})
+      .end(function(err,res){
+        expect(err).to.eql(null);
+        expect(Array.isArray(res.body)).to.be.true;
+        done();
+      });
+  });
 
 });
 
