@@ -72,7 +72,7 @@ module.exports = function(app, jwtauth) {
         return res.status(500).json({message: 'no concierge found matching that id'});
       }
       console.log(jobs.conciergeJobs);
-      jobQueue.find({_id: { $in: ['546c2d6c3fa04e02000f3ca5', '546c2d6c3fa04e02000f3ca6']}}, function(err, docs) {
+      jobQueue.find({_id: { $in: jobs.conciergeJobs}}, function(err, docs) {
         if (err) return res.status(500).json({message: 'error finding concierge jobs'});
         if (jobs === null) return res.status(500).json({message: 'no jobs found for concierge'});
         res.status(200).send(docs);
