@@ -16,7 +16,7 @@ User.collection.remove(function(err){
 });
 
 describe('the jobs test', function(){
-  
+
   var jwtToken;
   var jobdate = moment().utc().add(1, 'days').format();
 
@@ -55,4 +55,3 @@ describe('the jobs test', function(){
   });
 
 });
-
