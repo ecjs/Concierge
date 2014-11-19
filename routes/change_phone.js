@@ -5,7 +5,7 @@ var client = twilio(config.accountSid, config.authToken);
 var User = require('../models/user_model');
 
 module.exports = function(app, jwtauth) {
-  app.post('/changePhone', jwtauth, function(req, res) {
+  app.put('/changePhone', jwtauth, function(req, res) {
     User.findOne({_id: req.user._id}, function(err, user) {
       if (user === null) {
         return res.status(500).json({msg: 'no user found'});
