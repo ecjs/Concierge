@@ -25,6 +25,7 @@ describe('the jobs test', function(){
     .post('/users')
     .send({username:"joe3@example.com",password:"Foobar123",phone:"8474775286",name:{first:"joe",last:"elsey"}})
     .end(function (err, res) {
+      console.log(res.body);
       jwtToken = res.body.jwt;
       done();
     });
@@ -37,10 +38,11 @@ describe('the jobs test', function(){
       .set({jwt:jwtToken})
       .send(jobdate, true)
       .end(function(err, res){
-        expect(err).to.eql(null)
-        expect(res.body).to.have.property('parent')
+        expect(err).to.eql(null);
+        expect(res.body).to.have.property('parent');
+        console.log(res.body);
         id = res.body._id;
-        console.log(id);
+        console.log("The job number is: " + id);
         done();
       });
   });
@@ -51,6 +53,7 @@ describe('the jobs test', function(){
       .set({jwt:jwtToken})
       .end(function(err,res){
         expect(err).to.eql(null);
+        console.log('The job # is: ' + id);
         expect(Array.isArray(res.body)).to.be.true;
         done();
       });
@@ -61,6 +64,7 @@ describe('the jobs test', function(){
       .delete('/userJobs/' + id)
       .set({jwt:jwtToken})
       .end(function(err,res){
+        console.log('The job is: ' + id);
         expect(err).to.eql(null)
         expect(res.body).to.have.property('msg');
       });
