@@ -25,7 +25,7 @@ module.exports = function(grunt) {
         reporter: 'tap'
       },
 
-      src: ['test/user_test.js','test/concierge_test.js','test/change_test.js','test/jobs_test.js']
+      all: {src: ['test/user_test.js','test/concierge_test.js','test/change_test.js','test/jobs_test.js']}
 
     }
   
