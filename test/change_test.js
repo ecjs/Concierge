@@ -55,7 +55,7 @@ User.collection.remove(function(err){
     it('should reset a password', function(done){
       chai.request(testUrl)
         .get('/passwordReset')
-        .set({jwt:jwtToken})
+        .send({username:"joe10@example.com"})
         .end(function(err,res){
           expect(err).to.eql(null);
           expect(res.body).to.have.property('tempPass');
