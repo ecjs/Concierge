@@ -17,7 +17,7 @@ module.exports = function(app, jwtauth) {
       if (err) return res.status(500).send('there was an error deleting this job');
       res.json({msg: 'Job deleted successfully!'});
     });
-    User.findOne({id_: req.user._id}, function(err, user) {
+    User.findOne({_id: req.user._id}, function(err, user) {
       if (user === null) console.log('not finding user');
       console.log(user);
       var index = user.jobs.indexOf(req.params.id);
