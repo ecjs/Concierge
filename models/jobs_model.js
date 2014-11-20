@@ -3,7 +3,7 @@
 var mongoose = require('mongoose');
 var JobSchema = mongoose.Schema({
   jobDate: { type: String, required: true },
-  parent: { type: String },
+  parent: { type: String, required: true },
   parentName: {
     first: String,
     last: String
