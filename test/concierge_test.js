@@ -8,6 +8,7 @@ var moment = require('moment');
 chai.use(chaihttp);
 
 require('../server');
+var jobsCheck = require('../lib/jobManager');
 
 var expect = chai.expect;
 var testUrl = 'http://localhost:3000';
@@ -17,7 +18,8 @@ User.collection.remove(function(err){
 });
 
 describe('the concierge test', function(){
-  var jwtToken;
+  var ConciergeJwtToken;
+  var UserJwtToken;
   var jobdate = moment().utc().add(2, 'minutes').format();
   var id;
 
@@ -27,9 +29,21 @@ describe('the concierge test', function(){
       .post('/users')
       .send({username:"joe20@example.com",password:"Foobar123",phone:"8474775286",name:{first:"joe",last:"elsey"}})
       .end(function (err, res) {
-        jwtToken = res.body.jwt;
-        console.log(jwtToken);
+        UserJwtToken = res.body.jwt;
+        console.log(UserJwtToken);
         done();
+    });
+  });
+
+  //creates a concierge
+  before(function(done){
+    chai.request(testUrl)
+    .post('/users')
+    .send({username:"frank@example.com",password:"Foobar123",phone:"8474775286",name:{first:"joe",last:"elsey"}})
+    .end(function(err,res){
+      ConciergeJwtToken = res.body.jwt
+      console.log(ConciergeJwtToken);
+      done();
     });
   });
 
@@ -37,7 +51,7 @@ describe('the concierge test', function(){
   before(function(done){
     chai.request(testUrl)
       .post('/jobs')
-      .set({jwt:jwtToken})
+      .set({jwt:UserJwtToken})
       .send({jobDate:jobdate,recurring:true})
       .end(function(err, res){
         console.log(res.body);
@@ -48,7 +62,7 @@ describe('the concierge test', function(){
   it('should create a concierge', function(done){
     chai.request('http://localhost:3000')
     .post('/concierge')
-    .set({jwt:jwtToken})
+    .set({jwt:ConciergeJwtToken})
     .end(function(err,res){
       expect(err).to.eql(null);
       expect(res.body.concierge).to.be.true;
@@ -56,21 +70,10 @@ describe('the concierge test', function(){
     });
   });
 
-  it('should notify a concierge is available', function(done){
-    chai.request(testUrl)
-      .post('/conciergeAvailable')
-      .set({jwt:jwtToken})
-      .end(function(err,res){
-        expect(err).to.eql(null);
-        expect(res.status).to.eql(202)
-        done();
-      });
-    });
-
   it('should notify a concierge is unavailable', function(done){
     chai.request(testUrl)
       .post('/conciergeUnavailable')
-      .set({jwt:jwtToken})
+      .set({jwt:ConciergeJwtToken})
       .end(function(err,res){
         expect(err).to.eql(null);
         expect(res.status).to.eql(202);
@@ -78,10 +81,22 @@ describe('the concierge test', function(){
       });
     });
 
+  it('should notify a concierge is available', function(done){
+    chai.request(testUrl)
+      .post('/conciergeAvailable')
+      .set({jwt:ConciergeJwtToken})
+      .end(function(err,res){
+        jobsCheck.checkJobs();
+        expect(err).to.eql(null);
+        expect(res.status).to.eql(202)
+        done();
+      });
+    });
+
   it('should get a concierge', function(done) {
     chai.request(testUrl)
       .get('/conciergeList')
-      .set({jwt:jwtToken})
+      .set({jwt:ConciergeJwtToken})
       .end(function(err,res){
         expect(err).to.eql(null);
         expect(res.body).to.have.property('message');
@@ -92,7 +107,7 @@ describe('the concierge test', function(){
   it('should get a list of concierge jobs', function(done){
     chai.request(testUrl)
       .get('/conciergeList')
-      .set({jwt:jwtToken})
+      .set({jwt:ConciergeJwtToken})
       .end(function(err,res){
         expect(err).to.eql(null);
         console.log(res.body);
@@ -104,7 +119,7 @@ describe('the concierge test', function(){
   it('should remove a user from the concierge list', function(done){
     chai.request(testUrl)
     .post('/conciergeToUser')
-    .set({jwt:jwtToken})
+    .set({jwt:ConciergeJwtToken})
     .end(function(err,res){
       expect(err).to.eql(null)
       expect(res.body.concierge).to.be.false;
