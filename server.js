@@ -20,6 +20,7 @@ mongoose.connect(process.env.MONGO_URL || 'mongodb://localhost/concierge_dev');
 
 require('./routes/index')(app);
 require('./routes/call')(app);
+require('./routes/status_callback')(app);
 require('./routes/register_user')(app);
 require('./routes/register_concierge')(app, jwtauth);
 require('./routes/job')(app, jwtauth);
