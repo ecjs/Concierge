@@ -78,4 +78,21 @@ module.exports = function(app, jwtauth) {
       });
     });
   });
+  app.post('/conciergeToUser', jwtauth, function(req, res) {
+    User.findOne({_id: req.user._id}, function(err, user) {
+      if (err) {
+        return res.status(500).json({message: 'error finding user'});
+      }
+      if (user === null) {
+        return res.status(500).json({message: 'no user found matching that id'});
+      }
+      user.concierge = false;
+      user.conciergeAvailable = false;
+      user.save(function(err) {
+        if (err) return res.status(500).json({message: 'no user found matching that id'});
+        console.log('successfully updated concierge to user: ' + user);
+        res.status(202).json({concierge: false});
+      });
+    });
+  });
 };
