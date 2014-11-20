@@ -39,6 +39,7 @@ describe('the jobs test', function(){
       .end(function(err, res){
         expect(err).to.eql(null);
         expect(res.body).to.have.property('parent');
+        console.log(res.body);
         id = res.body._id;
         done();
       });
@@ -63,6 +64,16 @@ describe('the jobs test', function(){
         expect(err).to.eql(null)
         expect(res.body).to.have.property('msg');
         done();
+      });
+  });
+
+  it('should find a concierge job', function(){
+    chai.request(testUrl)
+      .get('/conciergeJobs')
+      .set({jwt:jwtToken})
+      .end(function(err,res){
+        expect(err).to.eql(null);
+        expect(res.body).to.have.property('_id');
       });
   });
 
