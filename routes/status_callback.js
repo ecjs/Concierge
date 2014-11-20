@@ -5,7 +5,7 @@ var twilio = require('twilio');
 var client = twilio(config.accountSid, config.authToken);
 
 module.exports = function(app) {
-  app.get('/StatusCallBack', function(req) {
+  app.post('/StatusCallBack', function(req) {
     console.log('whoop! status callback: ' + req.body);
   });
 };
