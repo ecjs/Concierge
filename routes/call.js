@@ -10,6 +10,7 @@ module.exports = function(app) {
     client.makeCall({
             to: req.body.phoneNumber,
             from: config.twilioNumber,
+            StatusCallBack: process.env.URL + '/StatusCallBack',
             url: process.env.URL + '/outbound'
         }, function(err) {
           console.log(err);
