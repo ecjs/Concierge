@@ -62,9 +62,9 @@ describe('the concierge test', function(){
       });
     });
 
-  it('should get a concierge', function(done){
+  it('should get a concierge', function(done) {
     chai.request(testUrl)
-      .get('/concierge')
+      .get('/conciergeList')
       .send({jwt:jwtToken})
       .end(function(err,res){
         expect(err).to.eql(null);

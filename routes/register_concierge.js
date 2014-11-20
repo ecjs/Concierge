@@ -36,10 +36,10 @@ module.exports = function(app, jwtauth) {
       }
       user.conciergeAvailable = true;
       user.conciergeJobs = [];
-      user.save(function(err) {
+      user.save(function(err, doc) {
         if (err) return res.status(500).json({message: 'no user found matching that id'});
         console.log('successfully updated concierge to available: ' + user._id);
-        res.status(202).json({conciergeAvailable: true});
+        res.status(202).json({conciergeAvailable: doc.conciergeAvailable});
       });
     });
   });
@@ -54,14 +54,14 @@ module.exports = function(app, jwtauth) {
         return res.status(500).json({message: 'no user found matching that id'});
       }
       user.conciergeAvailable = false;
-      user.save(function(err) {
+      user.save(function(err, doc) {
         if (err) return res.status(500).json({message: 'no user found matching that id'});
         console.log('successfully updated concierge to unavailable: ' + user._id);
-        res.status(202).json({conciergeAvailable: false});
+        res.status(202).json({conciergeAvailable: doc.conciergeAvailable});
       });
     });
   });
-  app.get('/concierge', jwtauth, function(req, res) {
+  app.get('/conciergeList', jwtauth, function(req, res) {
     User.findOne({_id: req.user._id}).lean().exec(function(err, user) {
       if (err) {
         console.log('error finding concierge: ' + err);
@@ -90,9 +90,19 @@ module.exports = function(app, jwtauth) {
       user.conciergeAvailable = false;
       user.save(function(err) {
         if (err) return res.status(500).json({message: 'no user found matching that id'});
-        console.log('successfully updated concierge to user: ' + user);
+        console.log('successfully changed concierge to user: ' + user);
         res.status(202).json({concierge: false});
       });
+    });
+  });
+  app.get('/concierge', jwtauth, function(req, res) {
+    User.findOne({_id: req.user._id}, function(err, user) {
+      res.status(200).json({concierge: user.concierge});
+    });
+  });
+  app.get('/conciergeAvailable', jwtauth, function(req, res) {
+    User.findOne({_id: req.user._id}, function(err, user) {
+      res.status(200).json({conciergeAvailable: user.conciergeAvailable});
     });
   });
 };
