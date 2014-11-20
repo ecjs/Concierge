@@ -5,8 +5,6 @@ var User = require('../models/user_model');
 
 module.exports = function(app, jwtauth) {
   app.post('/jobs', jwtauth, function(req, res) {
-    console.log('the user for this job post is: ' + req.user);
-    console.log('the users first name for this job post is: ' + req.user.name.first);
     var newJob = new Job({
       jobDate: req.body.jobDate,
       parent: req.user._id,
@@ -37,4 +35,20 @@ module.exports = function(app, jwtauth) {
     });
   });
 
+  app.delete('/userJobs/:id', jwtauth, function(req, res) {
+    console.log(req.user._id);
+    Job.remove({_id: req.params.id}, function(err) {
+      if (err) return res.status(500).send('there was an error deleting this job');
+    });
+    User.findOne({_id: req.user._id}, function(err, user) {
+      if (user === null) console.log('not finding user');
+      var index = user.jobs.indexOf(req.params.id);
+      if (index > -1) user.jobs.splice(index, 1);
+      user.save(function(err, user) {
+        if (err) console.log('could not delete job from user array');
+        console.log(user);
+        res.json({msg: 'Job deleted successfully!'});
+      });
+    });
+  });
 };
