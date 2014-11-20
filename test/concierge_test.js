@@ -34,7 +34,6 @@ describe('the concierge test', function(){
     .send({jwt:jwtToken})
     .end(function(err,res){
       expect(err).to.eql(null);
-      //console.log(res.body);
       expect(res.body.concierge).to.be.true;
       done();
     });
