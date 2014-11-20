@@ -17,7 +17,7 @@ User.collection.remove(function(err){
 
 describe('the jobs test', function(){
   var jwtToken;
-  var jobdate = moment().utc().add(1, 'days').format();
+  var jobdate = moment().utc().add(2, 'minutes').format();
   var id;
 
   before(function (done) {

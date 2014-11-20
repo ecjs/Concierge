@@ -17,7 +17,7 @@ User.collection.remove(function(err){
 
 describe('the concierge test', function(){
   var jwtToken;
-  var jobdate = moment().utc().add(5, 'minutes').format();
+  var jobdate = moment().utc().add(2, 'minutes').format();
   var id;
 
   //creates a user
