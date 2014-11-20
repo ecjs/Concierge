@@ -1,35 +1,25 @@
+'use strict';
+
 var mongoose = require('mongoose');
 var bcrypt = require('bcrypt-nodejs');
 var jwt = require('jsonwebtoken');
 var random = require('mongoose-simple-random');
 
 var UserSchema = mongoose.Schema({
-  username: {
-    type: String
+  username: { type: String, required: true },
+  password: { type: String, required: true },
+  phone: { type: String, required: true },
+  name: {
+    first: { type: String, required: true },
+    last: { type: String, required: true }
   },
-  password: {
-    type: String
-  },
-  phone: {
-    type: String
-  },
-  confirmed: {
-    type: Boolean
-  },
-  confirmationCode: {
-    type: String
-  },
-  concierge: {
-    type: Boolean
-  },
-  conciergeAvailable: {
-    type: Boolean
-  },
-  conciergeJobs: [{type: String}],
-  zipcode: {
-    type: String
-  },
-  jobs: [{type: String}]
+  // geoLocation: { type: Boolean },
+  confirmed: { type: Boolean },
+  confirmationCode: { type: String },
+  concierge: { type: Boolean },
+  conciergeAvailable: { type: Boolean },
+  conciergeJobs: [{ type: String }],
+  jobs: [{ type: String }]
 });
 
 UserSchema.plugin(random);

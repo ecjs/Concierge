@@ -6,22 +6,31 @@ module.exports = function(grunt) {
   grunt.initConfig({
     jshint: {
       options: {
-        node: true
+        node: true,
+        jshintrc: true
       },
       src: ['server.js', 'routes/**/*.js', 'lib/*.js']
     },
 
     jscs: {
-      src: 'server.js',
+      src: ['server.js', 'routes/**/*.js','lib/*.js'],
       options: {
         config: '.jscsrc'
       }
     },
 
     simplemocha: {
-      src: ['test/**/*.js']
+      options: {
+        timeout: 3000,
+        reporter: 'tap'
+      },
+
+      all: {src: ['test/user_test.js','test/concierge_test.js','test/change_test.js','test/jobs_test.js']}
+
     }
+  
   });
 
   grunt.registerTask('test', ['jshint', 'jscs', 'simplemocha']);
+  grunt.registerTask('default',['test']);
 };

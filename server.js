@@ -1,17 +1,14 @@
+'use strict';
+
 var express = require('express');
 var bodyParser = require('body-parser');
-var path = require('path');
-var logger = require('morgan');
 var config = require('./config');
-var twilio = require('twilio');
 var mongoose = require('mongoose');
 var passport = require('passport');
-var authController = require('./lib/auth.js');
 var CronJob = require('cron').CronJob;
-var jobManager = require('./lib/jobManager');
+var jobManager = require('./lib/jobManager.js');
 
 var app = express();
-var client = twilio(config.accountSid, config.authToken);
 
 app.use(bodyParser.urlencoded({ extended: true}));
 app.use(bodyParser.json());
@@ -27,6 +24,12 @@ require('./routes/register_user')(app);
 require('./routes/register_concierge')(app, jwtauth);
 require('./routes/job')(app, jwtauth);
 require('./routes/confirm_user')(app, jwtauth);
+require('./routes/resendConfirmation')(app, jwtauth);
+require('./routes/change_password')(app, jwtauth);
+require('./routes/change_phone')(app, jwtauth);
+require('./routes/change_username')(app, jwtauth);
+require('./routes/password_reset')(app);
+require('./routes/concierge_jobs')(app, jwtauth);
 
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
@@ -41,9 +44,11 @@ console.log('Concierge magic starts here..on port: ' + config.port);
 var jobCheckCron = new CronJob('0 * * * * *', function() {
   jobManager.checkJobs();
   console.log('Checking jobs to move to the Queue');
-}, null, true, 'America/Los_Angeles');
+}, null, false, 'America/Los_Angeles');
 
 var jobQueueCheckCron = new CronJob('0 * * * * *', function() {
   jobManager.checkQueue();
   console.log('Checking jobs to send to Twilio');
-}, null, true, 'America/Los_Angeles');
+}, null, false, 'America/Los_Angeles');
+jobCheckCron.start();
+jobQueueCheckCron.start();
