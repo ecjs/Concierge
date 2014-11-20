@@ -17,7 +17,7 @@ User.collection.remove(function(err){
 
 describe('the concierge test', function(){
   var jwtToken;
-  var jobdate = moment().utc().add(1, 'days').format();
+  var jobdate = moment().utc().add(5, 'minutes').format();
   var id;
 
   //creates a user
@@ -93,6 +93,7 @@ describe('the concierge test', function(){
       .set({jwt:jwtToken})
       .end(function(err,res){
         expect(err).to.eql(null);
+        console.log(res.body);
         expect(res.body).to.have.property('message');
         done();
       });
