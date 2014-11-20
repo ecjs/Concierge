@@ -22,6 +22,7 @@ describe('the concierge test', function() {
   var ConciergeJwtToken;
   var UserJwtToken;
   var jobdate = moment().utc().add(2, 'minutes').format();
+  var id;
 
   //creates a user
   before(function(done) {
@@ -106,7 +107,7 @@ describe('the concierge test', function() {
     chai.request(testUrl)
       .get('/conciergeList')
       .set({jwt:ConciergeJwtToken})
-      .end(function(err, res) {
+      .end(function(err,res){
         expect(err).to.eql(null);
         console.log(res.body);
         expect(res.status).to.eql(200);
