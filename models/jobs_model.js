@@ -2,16 +2,16 @@
 
 var mongoose = require('mongoose');
 var JobSchema = mongoose.Schema({
-  jobDate: { type: String },
+  jobDate: { type: String, required: true },
   parent: { type: String },
   parentName: {
     first: String,
     last: String
   },
-  parentNumber: { type: String },
-  optionsList: [{
-    weather:{ type: String}}],
-  recurring: { type: Boolean }
+  parentNumber: { type: String},
+  optionsList: [],
+  recurring: { type: Boolean },
+  customMsg: { type: String }
 });
 
 module.exports = mongoose.model('Job', JobSchema);
