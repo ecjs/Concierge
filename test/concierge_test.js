@@ -46,7 +46,7 @@ describe('the concierge test', function(){
   it('should create a concierge', function(done){
     chai.request('http://localhost:3000')
     .post('/concierge')
-    .send({jwt:jwtToken})
+    .set({jwt:jwtToken})
     .end(function(err,res){
       expect(err).to.eql(null);
       expect(res.body.concierge).to.be.true;
@@ -57,10 +57,10 @@ describe('the concierge test', function(){
   it('should notify a concierge is available', function(done){
     chai.request(testUrl)
       .post('/conciergeAvailable')
-      .send({jwt:jwtToken})
+      .set({jwt:jwtToken})
       .end(function(err,res){
         expect(err).to.eql(null);
-        expect(res.body.conciergeAvailable).to.be.true;
+        expect(res.status).to.eql(202)
         done();
       });
     });
@@ -68,10 +68,10 @@ describe('the concierge test', function(){
   it('should notify a concierge is unavailable', function(done){
     chai.request(testUrl)
       .post('/conciergeUnavailable')
-      .send({jwt:jwtToken})
+      .set({jwt:jwtToken})
       .end(function(err,res){
         expect(err).to.eql(null);
-        expect(res.body.conciergeAvailable).to.be.false;
+        expect(res.status).to.eql(202);
         done();
       });
     });
@@ -79,7 +79,7 @@ describe('the concierge test', function(){
   it('should get a concierge', function(done) {
     chai.request(testUrl)
       .get('/conciergeList')
-      .send({jwt:jwtToken})
+      .set({jwt:jwtToken})
       .end(function(err,res){
         expect(err).to.eql(null);
         expect(res.body).to.have.property('message');
