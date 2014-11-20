@@ -1,4 +1,3 @@
-'use strict';
 //the call test
 process.env.MONGO_URL = 'mongodb://localhost/users_test';
 var chai = require('chai');
