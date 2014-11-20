@@ -3,6 +3,7 @@ process.env.MONGO_URL = 'mongodb://localhost/users_test';
 var chai = require('chai');
 var chaihttp = require('chai-http');
 var User = require('../models/user_model');
+var Jobs = require('../models/jobs_model');
 var moment = require('moment');
 chai.use(chaihttp);
 
@@ -27,6 +28,7 @@ describe('the concierge test', function(){
       .send({username:"joe20@example.com",password:"Foobar123",phone:"8474775286",name:{first:"joe",last:"elsey"}})
       .end(function (err, res) {
         jwtToken = res.body.jwt;
+        console.log(jwtToken);
         done();
     });
   });
@@ -36,7 +38,7 @@ describe('the concierge test', function(){
     chai.request(testUrl)
       .post('/jobs')
       .set({jwt:jwtToken})
-      .send(jobdate, true)
+      .send({jobDate:jobdate,recurring:true})
       .end(function(err, res){
         console.log(res.body);
         done();
@@ -94,7 +96,7 @@ describe('the concierge test', function(){
       .end(function(err,res){
         expect(err).to.eql(null);
         console.log(res.body);
-        expect(res.body).to.have.property('message');
+        expect(res.status).to.eql(200);
         done();
       });
     });

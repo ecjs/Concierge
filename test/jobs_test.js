@@ -3,6 +3,7 @@ process.env.MONGO_URL = 'mongodb://localhost/users_test';
 var chai = require('chai');
 var chaihttp = require('chai-http');
 var User = require('../models/user_model');
+var Jobs = require('../models/jobs_model');
 var moment = require('moment');
 chai.use(chaihttp);
 
@@ -35,10 +36,10 @@ describe('the jobs test', function(){
     chai.request(testUrl)
       .post('/jobs')
       .set({jwt:jwtToken})
-      .send(jobdate, true)
+      .send({jobDate:jobdate, recurring:true})
       .end(function(err, res){
         expect(err).to.eql(null);
-        expect(res.body).to.have.property('parent');
+        expect(res.body).to.have.property('jobDate');
         console.log(res.body);
         id = res.body._id;
         done();
