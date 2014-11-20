@@ -10,7 +10,9 @@ module.exports = function(app, jwtauth) {
       parent: req.user._id,
       recurring: req.body.recurring,
       parentName: {first: req.user.name.first, last: req.user.name.last},
-      parentNumber: req.user.phone
+      parentNumber: req.user.phone,
+      optionsList: [],
+      customMsg: req.body.customMsg
     });
 
     newJob.save(function(err, job) {
