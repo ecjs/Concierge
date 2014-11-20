@@ -83,4 +83,9 @@ module.exports = function(app, jwtauth) {
       res.status(200).json({concierge: user.concierge});
     });
   });
+  app.get('/conciergeAvailable', jwtauth, function(req, res) {
+    User.findOne({_id: req.user._id}, function(err, user) {
+      res.status(200).json({conciergeAvailable: user.conciergeAvailable});
+    });
+  });
 };
