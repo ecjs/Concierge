@@ -7,6 +7,7 @@ var Jobs = require('../models/jobs_model');
 chai.use(chaihttp);
 
 require('../server');
+require('../routes/register_user');
 
 var expect = chai.expect;
 var testUrl = 'http://localhost:3000';
@@ -18,25 +19,24 @@ User.collection.remove(function(err){
 describe('the user test', function(){
   var jwtToken;
   var id;
-
-  before(function (done) {
-    chai.request(testUrl)
-      .post('/users')
-      .send({username:"joe1@example.com",password:"Foobar123",phone:"8474775286",name:{first:"joe",last:"elsey"}})
-      .end(function (err, res) {
-        jwtToken = res.body.jwt;
-        done();
-    });
-  });
+  var code;
 
   it('should create a user', function(done){
     chai.request(testUrl)
       .post('/users')
       .send({username:"joe2@example.com",password:"Foobar123",phone:"8474775286",name:{first:"joe",last:"elsey"}})
       .end(function(err, res){
+        User.find({username:"joe2@example.com"}, function(err,data){
+          if(err) throw(err);
+          for(var i = 0;i < data.length;i++){
+            code = data[i].confirmationCode;
+            console.log(code);
+          };
+        });
         expect (err).to.eql(null);
         expect (res.body).to.have.property('jwt');
-        id = res.body._id;
+        jwtToken = res.body.jwt;
+        console.log(jwtToken);
         done();
     });
   });
@@ -44,10 +44,11 @@ describe('the user test', function(){
   it('should get a user', function(done){
     chai.request(testUrl)
       .get('/users')
-      .send({jwt:jwtToken})
+      .set({jwt:jwtToken})
+      .auth('joe2@example.com','Foobar123')
       .end(function(err,res){
-        expect (err).to.eql(null);
-        expect (res.body).to.be.Object;
+        expect(err).to.eql(null);
+        expect(res.body).to.have.property('jwt');
         done();
     });
   });
@@ -56,9 +57,10 @@ describe('the user test', function(){
     chai.request(testUrl)
       .post('/confirm')
       .set({jwt:jwtToken})
+      .send({confirmationCode: code})
       .end(function(err,res){
         expect (err).to.eql(null);
-        expect (res.body.confirmed).to.be.false;
+        expect (res.body.confirmed).to.be.true;
         done();
     });
   });
@@ -69,7 +71,7 @@ describe('the user test', function(){
       .set({jwt:jwtToken})
       .end(function(err,res){
         expect (err).to.eql(null);
-        expect (res.body.confirmed).to.be.false;
+        expect (res.status).to.eql(200);
         done();
     });
   });
