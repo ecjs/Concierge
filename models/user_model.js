@@ -13,7 +13,7 @@ var UserSchema = mongoose.Schema({
     first: { type: String, required: true },
     last: { type: String, required: true }
   },
-  geoLocation: { type: Boolean },
+  // geoLocation: { type: Boolean },
   confirmed: { type: Boolean },
   confirmationCode: { type: String },
   concierge: { type: Boolean },
