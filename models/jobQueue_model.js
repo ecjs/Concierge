@@ -11,6 +11,7 @@ var QueueSchema = mongoose.Schema({
   parentNumber: { type: String },
   optionsList: [],
   recurring: { type: Boolean },
+  customMsg: { type: String },
   pickedConcierge: { type: String }
 });
 
