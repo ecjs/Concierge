@@ -47,7 +47,7 @@ describe('the user test', function(){
       .send({jwt:jwtToken})
       .end(function(err,res){
         expect (err).to.eql(null);
-        expect (res.body).to.be.Object; //can't currently test the alert window.
+        expect (res.body).to.be.Object;
         done();
     });
   });
@@ -72,6 +72,17 @@ describe('the user test', function(){
         expect (res.body.confirmed).to.be.false;
         done();
     });
+  });
+
+  it('should resend the confirmation code', function(done){
+    chai.request(testUrl)
+      .post('/resendConfirmation')
+      .set({jwt:jwtToken})
+      .end(function(err,res){
+        expect(err).to.eql(null);
+        expect(res.body).to.have.property('_id');
+        done();
+      });
   });
 
 });
