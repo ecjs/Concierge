@@ -35,7 +35,7 @@ describe('the jobs test', function(){
     chai.request(testUrl)
       .post('/jobs')
       .set({jwt:jwtToken})
-      .send(jobdate, true)
+      .send({jobDate:jobdate, recurring:true})
       .end(function(err, res){
         expect(err).to.eql(null);
         expect(res.body).to.have.property('parent');
