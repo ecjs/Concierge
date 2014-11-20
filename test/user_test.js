@@ -45,9 +45,8 @@ describe('the user test', function(){
     chai.request(testUrl)
       .get('/users')
       .set({jwt:jwtToken})
-      .auth("joe2@example.com","Foobar123"})
+      .auth('joe2@example.com','Foobar123')
       .end(function(err,res){
-        console.log(jwtToken);
         expect(err).to.eql(null);
         expect(res.body).to.have.property('jwt');
         done();
