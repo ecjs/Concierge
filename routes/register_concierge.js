@@ -61,7 +61,7 @@ module.exports = function(app, jwtauth) {
       });
     });
   });
-  app.get('/concierge', jwtauth, function(req, res) {
+  app.get('/conciergeJobs', jwtauth, function(req, res) {
     User.findOne({_id: req.user._id}).lean().exec(function(err, user) {
       if (err) {
         console.log('error finding concierge: ' + err);
@@ -76,6 +76,11 @@ module.exports = function(app, jwtauth) {
         if (docs.length === 0) return res.status(500).json({message: 'no jobs found for concierge'});
         res.status(200).send(docs);
       });
+    });
+  });
+  app.get('/concierge', jwtauth, function(req, res) {
+    User.findOne({_id: req.user._id}, function(err, user) {
+      res.status(200).json({concierge: user.concierge});
     });
   });
 };
