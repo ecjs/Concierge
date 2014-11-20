@@ -1,8 +1,8 @@
 'use strict';
 
-var config = require('../config');
-var twilio = require('twilio');
-var client = twilio(config.accountSid, config.authToken);
+// var config = require('../config');
+// var twilio = require('twilio');
+// var client = twilio(config.accountSid, config.authToken);
 
 module.exports = function(app) {
   app.post('/StatusCallBack', function(req) {
