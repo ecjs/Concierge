@@ -1,6 +1,6 @@
 Concierge
 =========
-<img src='https://travis-ci.org/joeelsey/Concierge.svg?branch=dev'/>
+<img src='https://travis-ci.org/ecjs/Concierge.svg?branch=master'/>
 Mobile wake up call service with a real person.
 - User signs up with Facebook, enters their phone number.  
 - We verify their number.  
