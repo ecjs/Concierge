@@ -19,19 +19,18 @@ User.collection.remove(function(err) {
 
 describe('the user test', function() {
   var jwtToken;
-  var id;
   var code;
 
   it('should create a user', function(done) {
     chai.request(testUrl)
       .post('/users')
-      .send({username:"joe2@example.com",password:"Foobar123",phone:"8474775286",name:{first:"joe",last:"elsey"}})
+      .send({username:'joe2@example.com', password:'Foobar123', phone:'8474775286', name:{first:'joe', last:'elsey'}})
       .end(function(err, res){
-        User.find({username:"joe2@example.com"}, function(err, data) {
+        User.find({username:'joe2@example.com'}, function(err, data) {
           if(err) throw(err);
           for(var i = 0;i < data.length;i++) {
             code = data[i].confirmationCode;
-          };
+          }
         });
         expect (err).to.eql(null);
         expect (res.body).to.have.property('jwt');
@@ -44,7 +43,7 @@ describe('the user test', function() {
     chai.request(testUrl)
       .get('/users')
       .set({jwt:jwtToken})
-      .auth('joe2@example.com','Foobar123')
+      .auth('joe2@example.com', 'Foobar123')
       .end(function(err, res) {
         expect(err).to.eql(null);
         expect(res.body).to.have.property('jwt');
