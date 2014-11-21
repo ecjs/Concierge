@@ -45,7 +45,8 @@ module.exports = function(app) {
       res.render('tryCallAgain', {firstName: req.params.firstName, lastName: req.params.lastName, phoneNumber: req.params.phoneNumber});
     }
     else {
-      res.json({success:'completed'});
+      res.type('text/xml');
+      res.render('hangup');
     }
   });
 };
