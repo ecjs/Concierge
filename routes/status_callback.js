@@ -8,6 +8,7 @@ var fallbackCall = require('../lib/fallBackCall');
 module.exports = function(app) {
   app.post('/StatusCallBack/:firstName/:lastName/:phoneNumber', function(req, res) {
     if ((req.body.AnsweredBy === 'machine') || (req.body.CallStatus === 'canceled' || req.body.CallStatus ===  'failed' || req.body.CallStatus ===  'no-answer')) {
+      console.log('first call failed, time to try again.');
       res.type('text/xml');
       res.render('hangupMachine');
       fallbackCall.makeCall(req.params.firstName, req.params.lastName, req.params.phoneNumber);
