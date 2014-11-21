@@ -1,0 +1,5 @@
+doctype xml
+Response
+  Say(voice='alice').
+    The user didnt answer, trying again. You are about to speak to #{firstName} #{lastName} and wake them up.  Good luck!
+  Dial(timeout='15') +1#{phoneNumber}
