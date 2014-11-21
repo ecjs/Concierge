@@ -14,7 +14,7 @@ var expect = chai.expect;
 var testUrl = 'http://localhost:3000';
 
 User.collection.remove(function(err) {
-  if(err) throw(err);
+  if (err) throw(err);
 });
 
 describe('the user test', function() {
@@ -25,10 +25,10 @@ describe('the user test', function() {
     chai.request(testUrl)
       .post('/users')
       .send({username:'joe2@example.com', password:'Foobar123', phone:'8474775286', name:{first:'joe', last:'elsey'}})
-      .end(function(err, res){
+      .end(function(err, res) {
         User.find({username:'joe2@example.com'}, function(err, data) {
-          if(err) throw(err);
-          for(var i = 0;i < data.length;i++) {
+          if (err) throw(err);
+          for (var i = 0;i < data.length;i++) {
             code = data[i].confirmationCode;
           }
         });
