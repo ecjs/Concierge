@@ -13,7 +13,6 @@ module.exports = function(app) {
       }, function(err, call) {
         if (err) console.log('error canceling call');
         console.log(call.direction);
-        res.status(200).send('success');
         fallbackCall.makeCall(req.params.firstName, req.params.lastName, req.params.phoneNumber);
         res.type('text/xml');
         res.render('hangup');
