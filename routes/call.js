@@ -36,6 +36,17 @@ module.exports = function(app) {
   app.post('/outboundMachine/:firstName/:lastName/', function(req, res) {
     console.log('twilio request:' + req.body.CallSid);
     res.type('text/xml');
-    res.render('outboundNoConcierge', {firstName: req.params.firstName, lastName: req.params.lastName});
+    res.render('outboundMachine', {firstName: req.params.firstName, lastName: req.params.lastName});
+  });
+  app.post('/tryCallAgain/:firstName/:lastName/:phoneNumber', function(req, res) {
+    console.log('twilio request:' + req.body.DialCallStatus);
+    if (req.body.DialCallStatus === 'no-answer' || req.body.DialCallStatus === 'failed' || req.body.DialCallStatus === 'busy') {
+      res.type('text/xml');
+      res.render('tryCallAgain', {firstName: req.params.firstName, lastName: req.params.lastName, phoneNumber: req.params.phoneNumber});
+    }
+    else {
+      res.type('text/xml');
+      res.render('hangup');
+    }
   });
 };
