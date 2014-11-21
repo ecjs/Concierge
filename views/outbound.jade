@@ -2,4 +2,4 @@ doctype xml
 Response
   Say(voice='alice').
     You are about to speak to #{firstName} #{lastName} and wake them up.  Good luck!
-  Dial(timeout='15') +1#{phoneNumber}
+  Dial(timeout='15', mark='20') +1#{phoneNumber}
