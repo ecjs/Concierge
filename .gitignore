@@ -2,6 +2,10 @@ node_modules/
 db/
 .env.example
 
+#Specific Test Files#
+#####################
+sinon_test.js
+
 # Compiled source #
 ###################
 *.com
