@@ -30,7 +30,6 @@ describe('the concierge test', function(){
       .send({username:"joe20@example.com",password:"Foobar123",phone:"8474775286",name:{first:"joe",last:"elsey"}})
       .end(function (err, res) {
         UserJwtToken = res.body.jwt;
-        console.log(UserJwtToken);
         done();
     });
   });
@@ -42,7 +41,6 @@ describe('the concierge test', function(){
     .send({username:"frank@example.com",password:"Foobar123",phone:"8474775286",name:{first:"joe",last:"elsey"}})
     .end(function(err,res){
       ConciergeJwtToken = res.body.jwt
-      console.log(ConciergeJwtToken);
       done();
     });
   });
@@ -54,7 +52,6 @@ describe('the concierge test', function(){
       .set({jwt:UserJwtToken})
       .send({jobDate:jobdate,recurring:true})
       .end(function(err, res){
-        console.log(res.body);
         done();
       });
   });
@@ -110,7 +107,6 @@ describe('the concierge test', function(){
       .set({jwt:ConciergeJwtToken})
       .end(function(err,res){
         expect(err).to.eql(null);
-        console.log(res.body);
         expect(res.status).to.eql(200);
         done();
       });

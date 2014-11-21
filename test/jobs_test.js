@@ -26,7 +26,6 @@ describe('the jobs test', function(){
     .post('/users')
     .send({username:"joe3@example.com",password:"Foobar123",phone:"8474775286",name:{first:"joe",last:"elsey"}})
     .end(function (err, res) {
-      console.log(res.body);
       jwtToken = res.body.jwt;
       done();
     });
@@ -40,7 +39,6 @@ describe('the jobs test', function(){
       .end(function(err, res){
         expect(err).to.eql(null);
         expect(res.body).to.have.property('jobDate');
-        console.log(res.body);
         id = res.body._id;
         done();
       });
