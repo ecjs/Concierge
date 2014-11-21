@@ -1,7 +1,7 @@
 Concierge
 =========
-<img src='https://travis-ci.org/ecjs/Concierge.svg?branch=master'/>
-<img src='https://david-dm.org/ecjs/Concierge.png'/>
+<img src='https://travis-ci.org/ecjs/Concierge.svg?branch=master'/><br>
+<img src='https://david-dm.org/ecjs/Concierge.png'/><br>
 Mobile wake up call service with a real person.
 - User signs up with email/name/password, enters their phone number.  
 - We verify their number via sms.  
