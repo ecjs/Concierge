@@ -92,11 +92,11 @@ describe('the concierge test', function() {
 
   it('should get a concierge', function(done) {
     chai.request(testUrl)
-      .get('/conciergeList')
+      .get('/concierge')
       .set({jwt:ConciergeJwtToken})
       .end(function(err, res) {
         expect(err).to.eql(null);
-        expect(res.body).to.have.property('message');
+        expect(res.body).to.have.property('concierge');
         done();
       });
   });
