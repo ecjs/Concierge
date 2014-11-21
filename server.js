@@ -48,7 +48,7 @@ var jobCheckCron = new CronJob('0 * * * * *', function() {
   console.log('Checking jobs to move to the Queue');
 }, null, false, 'America/Los_Angeles');
 
-var jobQueueCheckCron = new CronJob('0 * * * * *', function() {
+var jobQueueCheckCron = new CronJob('* * * * * *', function() {
   jobManager.checkQueue();
   console.log('Checking jobs to send to Twilio');
 }, null, false, 'America/Los_Angeles');
