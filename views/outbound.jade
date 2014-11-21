@@ -1,5 +1,5 @@
 doctype xml
 Response
   Say(voice='alice').
-    You are about to speak to #{firstName} #{lastName} and wake them up.  Good luck!
+  You are about to speak to #{firstName} #{lastName} and wake them up.  Good luck!
   Dial(action=/tryCallAgain/#{firstName}/#{lastName}/#phoneNumber, timeout='15') +1#{phoneNumber}
