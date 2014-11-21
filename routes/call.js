@@ -36,6 +36,6 @@ module.exports = function(app) {
   app.post('/outboundMachine/:firstName/:lastName/', function(req, res) {
     console.log('twilio request:' + req.body.CallSid);
     res.type('text/xml');
-    res.render('outboundNoConcierge', {firstName: req.params.firstName, lastName: req.params.lastName});
+    res.render('outboundMachine', {firstName: req.params.firstName, lastName: req.params.lastName});
   });
 };

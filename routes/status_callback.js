@@ -7,7 +7,7 @@ var fallbackCall = require('../lib/fallBackCall');
 
 module.exports = function(app) {
   app.post('/StatusCallBack/:firstName/:lastName/:phoneNumber', function(req, res) {
-    if (req.body.AnsweredBy === 'machine') {
+    if ((req.body.AnsweredBy === 'machine') || (req.body.CallStatus === 'canceled' || 'failed' || 'no-answer')) {
       client.calls(req.body.CallSid).update({
         status: 'completed'
       }, function(err, call) {
