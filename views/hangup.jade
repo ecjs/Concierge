@@ -1,5 +1,8 @@
 doctype xml
 Response
   Dial(timeout='15') +1#{phoneNumber}
-    Say(voice='alice').
-      Good morning #{firstName}! This is your scheduled wake up call. We are sorry we could not connect you with a concierge. We will do better next time!  Have a great day!
+  Say(voice='alice').
+    Good morning #{firstName}! This is your scheduled wake up call. We are sorry we could not connect you with a concierge. We will do better next time!  Have a great day!
+  Dial(timeout='15') +1#{phoneNumber}
+  Say(voice='alice').
+    Good morning #{firstName}! This is your scheduled wake up call. We are sorry we could not connect you with a concierge. We will do better next time!  Have a great day!
