@@ -76,7 +76,7 @@ User.collection.remove(function(err){
 
       it('should receive an outbound call with twilio from a heartless machine.', function(done){
         chai.request(testUrl)
-          .post('')
+          .post()
       })
 
       jobsCheck.checkJobs();
