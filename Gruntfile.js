@@ -21,7 +21,7 @@ module.exports = function(grunt) {
 
     simplemocha: {
       options: {
-        timeout: 3000,
+        timeout: 6000,
         reporter: 'tap'
       },
 
@@ -33,4 +33,5 @@ module.exports = function(grunt) {
 
   grunt.registerTask('test', ['jshint', 'jscs', 'simplemocha']);
   grunt.registerTask('default',['test']);
+  
 };
