@@ -20,6 +20,7 @@ User.collection.remove(function(err) {
 describe('the jobs test', function() {
   var jwtToken;
   var jobdate = moment().utc().add(2, 'minutes').format();
+  var newJobdate = moment().utc().add(5,'minutes').format();
   var id;
 
   before(function(done) {
@@ -40,6 +41,7 @@ describe('the jobs test', function() {
       .end(function(err, res) {
         expect(err).to.eql(null);
         expect(res.body).to.have.property('jobDate');
+        console.log(jobdate);
         id = res.body._id;
         done();
       });
@@ -54,6 +56,19 @@ describe('the jobs test', function() {
         expect(Array.isArray(res.body)).to.be.true;
         done();
       });
+  });
+
+  it('should change a job time', function(done){
+    chai.request(testUrl)
+    .put('/userJobs/' + id)
+    .set({jwt:jwtToken})
+    .send({jobDate:newJobdate, recurring:true})
+    .end(function(err,res){
+      expect(err).to.eql(null);
+      expect(res.body).to.have.property('jobDate');
+      console.log(newJobdate);
+      done();
+    });
   });
 
   it('should delete a job', function(done) {

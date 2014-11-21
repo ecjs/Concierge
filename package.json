@@ -4,7 +4,7 @@
   "description": "Mobile wake up call service.",
   "main": "server.js",
   "scripts": {
-    "start":"node server.js",
+    "start": "node server.js",
     "test": "node_modules/grunt-cli/bin/grunt"
   },
   "repository": {
@@ -48,6 +48,7 @@
     "grunt-jscs": "^0.8.1",
     "grunt-mongo-drop": "^0.1.1",
     "grunt-simple-mocha": "^0.4.0",
+    "siege": "^0.1.0",
     "sinon": "^1.12.1"
   }
 }
