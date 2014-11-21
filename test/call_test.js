@@ -26,7 +26,6 @@ User.collection.remove(function(err){
       .send({username:"joe20@example.com",password:"Foobar123",phone:"8474775286",name:{first:"joe",last:"elsey"}})
       .end(function (err, res) {
         jwtToken = res.body.jwt;
-        console.log(res.body);
         done();
     });
   });
