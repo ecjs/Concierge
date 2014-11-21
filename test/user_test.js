@@ -30,13 +30,11 @@ describe('the user test', function(){
           if(err) throw(err);
           for(var i = 0;i < data.length;i++){
             code = data[i].confirmationCode;
-            console.log(code);
           };
         });
         expect (err).to.eql(null);
         expect (res.body).to.have.property('jwt');
         jwtToken = res.body.jwt;
-        console.log(jwtToken);
         done();
     });
   });
