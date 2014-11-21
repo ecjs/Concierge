@@ -21,7 +21,7 @@ module.exports = function(grunt) {
 
     simplemocha: {
       options: {
-        timeout: 4000,
+        timeout: 6000,
         reporter: 'tap'
       },
 
