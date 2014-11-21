@@ -38,4 +38,9 @@ module.exports = function(app) {
     res.type('text/xml');
     res.render('outboundMachine', {firstName: req.params.firstName, lastName: req.params.lastName});
   });
+  app.post('/tryCallAgain/:firstName/:lastName/:phoneNumber', function(req, res) {
+    console.log('twilio request:' + req.body.CallSid);
+    res.type('text/xml');
+    res.render('tryCallAgain', {firstName: req.params.firstName, lastName: req.params.lastName, phoneNumber: req.params.phoneNumber});
+  });
 };
