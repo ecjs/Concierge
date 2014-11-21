@@ -32,5 +32,7 @@ module.exports = function(grunt) {
   });
 
   grunt.registerTask('test', ['jshint', 'jscs', 'simplemocha']);
-  grunt.registerTask('default',['test']);
+  grunt.registerTask('default',['test','multi']);
+  
+  });
 };
